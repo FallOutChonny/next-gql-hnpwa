@@ -1,9 +1,9 @@
-import App from 'next/app'
+import _App from 'next/app'
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
-import theme from '../theme'
+import theme from 'utils/theme'
 
-export default class MyApp extends App {
+export default class App extends _App {
   render() {
     const { Component, pageProps } = this.props
     return (
