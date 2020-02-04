@@ -15,10 +15,6 @@ const tableProps = {
   cellSpacing: 0,
 }
 
-const tableStyles = {
-  width: '85%',
-}
-
 export default function App({ title, children }: Props) {
   return (
     <>
@@ -34,7 +30,7 @@ export default function App({ title, children }: Props) {
           {...tableProps}
           id="hnmain"
           className="bg-lightGrey"
-          style={tableStyles}>
+          style={{ width: '85%' }}>
           <tbody>
             <Header />
             <tr id="pagespace" title={title} />

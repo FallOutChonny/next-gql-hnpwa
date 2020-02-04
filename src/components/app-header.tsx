@@ -20,7 +20,7 @@ export default function AppHeader() {
                   </a>
                 </Link>
               </td>
-              <td className="h-10" css={{ lineHeight: '12pt' }}>
+              <td className="h-10" style={{ lineHeight: '12pt' }}>
                 <span className="text-dark">
                   <NavLink
                     title="Hacker News"
