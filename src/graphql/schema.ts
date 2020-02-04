@@ -8,7 +8,7 @@ const Query = /* GraphQL */ `
   }
 `
 
-const schema = makeExecutableSchema({
+export const schema = makeExecutableSchema({
   typeDefs: [Query, newsItemsTypeDef],
   resolvers: merge(newsItemsResolver),
 })
