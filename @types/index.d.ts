@@ -9,3 +9,9 @@ declare namespace React {
     css?: import('react').CSSProperties
   }
 }
+
+declare namespace NodeJS {
+  interface Process {
+    browser: boolean
+  }
+}
