@@ -7,6 +7,7 @@ import GlobalStyles from 'components/global-styles'
 type Props = {
   children: React.ReactNode
   title?: string
+  isFooterVisible?: boolean
 }
 
 const tableProps = {
@@ -15,22 +16,25 @@ const tableProps = {
   cellSpacing: 0,
 }
 
-export default function App({ title, children }: Props) {
+export default function App({
+  title,
+  children,
+  isFooterVisible = true,
+}: Props) {
   return (
     <>
       <Head>
         <meta name="referrer" content="origin" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" href="favicon.ico" />
-        <title>{title} | Hacker News</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <title>{title ? `${title} | ` : ''}Hacker News</title>
       </Head>
       <GlobalStyles />
-      <div className="d-flex justify-content--center">
+      <center>
         <table
           {...tableProps}
           id="hnmain"
-          className="bg-lightGrey"
-          style={{ width: '85%' }}>
+          css={{ width: '85%', background: '#f6f6ef' }}>
           <tbody>
             <Header />
             <tr id="pagespace" title={title} />
@@ -41,10 +45,10 @@ export default function App({ title, children }: Props) {
                 </table>
               </td>
             </tr>
-            <Footer />
+            {isFooterVisible && <Footer />}
           </tbody>
         </table>
-      </div>
+      </center>
     </>
   )
 }

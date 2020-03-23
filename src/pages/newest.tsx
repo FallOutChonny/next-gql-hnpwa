@@ -7,11 +7,11 @@ import { Feed } from 'constants/types'
 import { withApollo } from '../graphql/client'
 import { useNewsItems } from '../graphql/news-items'
 
-function IndexPage() {
-  const { data } = useNewsItems({ feed: Feed.TOP })
+function NewestPage() {
+  const { data } = useNewsItems({ feed: Feed.NEWEST })
 
   return (
-    <App>
+    <App title="New Links">
       <tr className="height-10" />
       {data.edges.map((x, idx) => (
         <NewsItems
@@ -25,7 +25,7 @@ function IndexPage() {
           <tr>
             <td colSpan={2} />
             <td className="text-10pt text--grey">
-              <Link href={`/?p=${data.nextPage}`}>
+              <Link href={`/newest?p=${data.nextPage}`}>
                 <A>More</A>
               </Link>
             </td>
@@ -36,4 +36,4 @@ function IndexPage() {
   )
 }
 
-export default withApollo(IndexPage)
+export default withApollo(NewestPage)

@@ -10,6 +10,15 @@ declare namespace React {
   }
 }
 
+declare namespace JSX {
+  interface IntrinsicElements {
+    center: React.DetailedHTMLProps<
+      React.HTMLAttributes<HTMLElement>,
+      HTMLElement
+    >
+  }
+}
+
 declare namespace NodeJS {
   interface Process {
     browser: boolean

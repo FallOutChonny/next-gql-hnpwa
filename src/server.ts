@@ -14,10 +14,10 @@ app.prepare().then(() => {
   server.use(bodyParser.urlencoded({ extended: true }))
 
   const apolloServer = new ApolloServer({
-    context: ({ req, res }) => [req, res],
     schema,
     introspection: true,
     playground: true,
+    context: ctx => ctx,
   })
 
   apolloServer.applyMiddleware({ app: server, path: '/graphql' })
@@ -25,8 +25,8 @@ app.prepare().then(() => {
   server.all('*', (req, res) => handle(req, res))
 
   server.listen(APP_PORT, () => {
-    console.log(`> App ready on http://localhost:${APP_PORT}`)
-    console.log(`> GraphQL ready on http://localhost:${APP_PORT}/graphql`)
+    console.log(`🚀  App ready on http://localhost:${APP_PORT}`)
+    console.log(`🔥  GraphQL ready on http://localhost:${APP_PORT}/graphql`)
   })
 })
 

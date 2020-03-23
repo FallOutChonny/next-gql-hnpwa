@@ -7,12 +7,27 @@ import { Feed } from 'constants/types'
 import { withApollo } from '../graphql/client'
 import { useNewsItems } from '../graphql/news-items'
 
-function IndexPage() {
-  const { data } = useNewsItems({ feed: Feed.TOP })
+function JobsPage() {
+  const { data } = useNewsItems({ feed: Feed.JOB })
 
   return (
-    <App>
-      <tr className="height-10" />
+    <App title="jobs">
+      <tr className="height-16" />
+      <tr>
+        <td />
+        <td>
+          <span>
+            <img src="/s.gif" alt="" width={14} height={1} />
+          </span>
+        </td>
+        <td className="text--grey">
+          These are jobs at YC startups. See more at{' '}
+          <Link href={'/'}>
+            <A className="text-underline text-dark">Work at a Startup</A>
+          </Link>
+        </td>
+      </tr>
+      <tr className="height-14" />
       {data.edges.map((x, idx) => (
         <NewsItems
           key={x.node.id}
@@ -25,7 +40,7 @@ function IndexPage() {
           <tr>
             <td colSpan={2} />
             <td className="text-10pt text--grey">
-              <Link href={`/?p=${data.nextPage}`}>
+              <Link href={`/jobs?p=${data.nextPage}`}>
                 <A>More</A>
               </Link>
             </td>
@@ -36,4 +51,4 @@ function IndexPage() {
   )
 }
 
-export default withApollo(IndexPage)
+export default withApollo(JobsPage)

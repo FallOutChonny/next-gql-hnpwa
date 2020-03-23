@@ -1,86 +1,185 @@
-import api from './hn-api'
 import gql from 'graphql-tag'
+import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/react-hooks'
+import { pathOr } from 'ramda'
+import { POSTS_PER_PAGE } from '../config'
+import { QueryResult, nullQueryResult, NewsItems } from '../constants/types'
+import {
+  fetch,
+  fetchNewsItems,
+  loopFetchNewsItemsComments,
+} from '../utils/hn-data-api'
+import { newsItemsFragment } from './typeDefs'
 
-export enum NewsItemsTypes {
-  TOP = 'top',
-}
+export const typeDefs = /* GraphQL */ `
+  enum Feed {
+    top
+    ask
+    job
+    show
+    new
+    best
+  }
 
-export type NewsItems = {
-  id: number
-  deleted: boolean
-  type: string
-  by: string
-  time: number
-  text: string
-  dead: boolean
-  parent: number
-  poll: number
-  kids: number[]
-  url: string
-  score: number
-  title: string
-  parts: number[]
-  descendants: number
-}
-
-export const newsItemsTypeDef = /* GraphQL */ `
   type NewsItems {
     by: String
-    id: Int
+    id: ID
     score: Int
     text: String
     time: Int
-    type: String
-    kids: [ID]
     title: String
+    type: String
     url: String
+    kids: [NewsItems]
+  }
+
+  type NewsItemsEdge {
+    cursor: String!
+    node: NewsItems!
+  }
+
+  type NewsItemsConnection {
+    pageInfo: PageInfo!
+    edges: [NewsItemsEdge]
+  }
+
+  input NewsItemsInput {
+    first: Int
+    feed: Feed
   }
 
   extend type Query {
-    newsItems(type: String = "top"): [NewsItems]
+    feed(input: NewsItemsInput): NewsItemsConnection
+
+    newsItems(id: Int): NewsItems!
   }
 `
 
-export const newsItemsResolver = {
+export const resolvers = {
   Query: {
-    newsItems: async (_, { type }, __) => {
-      const eventref = api.child(`${type}stories`)
-      const snapshot = await eventref.once('value')
-      const ids: number[] = await snapshot.val()
+    feed: async (_, { input: { first = 1, feed } }) => {
+      const limit = POSTS_PER_PAGE
 
-      return await Promise.all(
-        ids.map(async id => {
-          const eventref = api.child(`item/${id}`)
-          const snapshot = await eventref.once('value')
+      const ids: number[] = await fetch(`${feed}stories`)
 
-          return snapshot.val()
-        }),
-      )
+      return {
+        edges: await Promise.all(
+          ids.slice((first - 1) * limit, first * limit).map(async id => {
+            const items = await fetchNewsItems(id)
+
+            return {
+              cursor: Buffer.from(`${items.time}`).toString('base64'),
+              node: {
+                ...items,
+                kids: pathOr([], ['kids'], items).map(id => ({ id })),
+              },
+            }
+          }),
+        ),
+        pageInfo: {
+          hasNextPage: first * limit < ids.length,
+          totalPageCount: Math.floor(ids.length / limit) + 1,
+        },
+      }
+    },
+
+    newsItems: async (_, { id }) => {
+      return await loopFetchNewsItemsComments(await fetchNewsItems(id))
     },
   },
+
+  // For the performance, dont enable nested news-items query
+  // NewsItems: {
+  //   kids: async (newsItems: NewsItems) => fetchNewsItems(newsItems.id),
+  //   by: async (newsItems: NewsItems) => fetchUser(newsItems.by),
+  // },
 }
 
-export const newsItemsQuery = gql`
-  query listNewsItems($type: String) {
-    newsItems(type: $type) {
-      by
-      id
-      score
-      text
-      time
-      type
-      kids
-      title
-      url
+const newsItemsQuery = gql`
+  query Feed($input: NewsItemsInput) {
+    feed(input: $input) {
+      edges {
+        cursor
+        node {
+          ...NewsItemsFields
+          kids {
+            id
+            __typename
+          }
+        }
+      }
+      pageInfo {
+        hasNextPage
+        totalPageCount
+      }
     }
   }
+  ${newsItemsFragment}
 `
 
-export const useNewsItems = () => {
-  const { data, ...others } = useQuery<{ newsItems: any[] }>(newsItemsQuery, {
-    variables: { type: 'top' },
-  })
+const newsItemsWithCommentsQuery = gql`
+  query NewsItems($id: Int) {
+    newsItems(id: $id) {
+      __typename
+      ...NewsItemsFields
+      kids {
+        ...NewsItemsFields
+        kids {
+          ...NewsItemsFields
+          kids {
+            ...NewsItemsFields
+            kids {
+              ...NewsItemsFields
+              kids {
+                ...NewsItemsFields
+                kids {
+                  ...NewsItemsFields
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  ${newsItemsFragment}
+`
 
-  return { data, ...others }
+export const useNewsItems = ({ feed }: { feed?: string } = {}) => {
+  const { query } = useRouter()
+  const first = +pathOr(1, ['p'], query)
+
+  const { data, ...others } = useQuery<{ newsItems: QueryResult<NewsItems> }>(
+    newsItemsQuery,
+    {
+      variables: {
+        input: { first, feed },
+      },
+    },
+  )
+
+  return {
+    data: {
+      ...(pathOr(nullQueryResult, ['feed'], data) as QueryResult<NewsItems>),
+      nextPage: first + 1,
+      startIndex: (first - 1) * POSTS_PER_PAGE,
+    },
+    ...others,
+  }
+}
+
+export const useNewsItemsWithComments = () => {
+  const { query } = useRouter()
+
+  const { data, ...others } = useQuery<{ newsItems: NewsItems }>(
+    newsItemsWithCommentsQuery,
+    {
+      variables: { id: +query.id },
+    },
+  )
+
+  return {
+    data: pathOr({ kids: [] }, ['newsItems'], data) as NewsItems,
+    ...others,
+  }
 }

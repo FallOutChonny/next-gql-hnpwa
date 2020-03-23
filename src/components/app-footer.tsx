@@ -1,42 +1,41 @@
 import React from 'react'
-import { Segment } from 'components/layouts'
-import NavLink from 'components/nav-link'
+import Divider from 'components/divider'
+import Link from 'components/link'
 
 export default function AppFooter() {
   return (
     <tr className="nav">
       <td>
-        <img src="/s.gif" height={10} width={0} />
+        <img src="/s.gif" height={10} width={0} alt="nav" />
         <table className="width--full" cellSpacing={0} cellPadding={1}>
           <tbody>
             <tr>
-              <td className="bg-orange"></td>
+              <td className="bg--orange"></td>
             </tr>
           </tbody>
         </table>
         <br />
-        <div className="d-flex justify-content--center align-items--center flex-direction--column">
+        <center>
           <div className="text-8pt">
-            <NavLink href="/newsguidelines" title="Guidelines" />
-            <NavLink href="/newsfaq" title="FAQ" />
+            <Link href="/newsguidelines" title="Guidelines" />
+            <Link href="/newsfaq" title="FAQ" />
             <a href="mailto:hn@ycombinator.com">Support</a>
-            <Segment />
+            <Divider />
             <a href="https://github.com/HackerNews/API">API</a>
-            <Segment />
-            <NavLink href="/security" title="Security" />
-            <NavLink href="/lists" title="Lists" />
-            <NavLink href="/libookmarkletsts" title="Bookmarklet" />
+            <Divider />
+            <Link href="/security" title="Security" />
+            <Link href="/lists" title="Lists" />
+            <Link href="/libookmarkletsts" title="Bookmarklet" />
             <a href="http://www.ycombinator.com/legal/">Legal</a>
-            <Segment />
+            <Divider />
             <a href="http://www.ycombinator.com/apply/">Apply to YC</a>
-            <Segment />
+            <Divider />
             <a href="mailto:hn@ycombinator.com">Contact</a>
           </div>
           <form
             method="get"
-            className="mt-15"
-            action="//hn.algolia.com/"
-            style={{ marginBlockEnd: '1em' }}>
+            className="mt-15 m-block-end--1em"
+            action="//hn.algolia.com/">
             <span className="mr-5">Search:</span>
             <input
               name="q"
@@ -45,10 +44,10 @@ export default function AppFooter() {
               spellCheck="false"
               autoCapitalize="off"
               autoComplete="false"
-              className="w-146 text-10pt"
+              className="width-146 text-10pt"
             />
           </form>
-        </div>
+        </center>
       </td>
     </tr>
   )

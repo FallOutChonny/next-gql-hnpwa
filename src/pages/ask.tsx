@@ -7,12 +7,12 @@ import { Feed } from 'constants/types'
 import { withApollo } from '../graphql/client'
 import { useNewsItems } from '../graphql/news-items'
 
-function IndexPage() {
-  const { data } = useNewsItems({ feed: Feed.TOP })
+function AskPage() {
+  const { data } = useNewsItems({ feed: Feed.ASK })
 
   return (
-    <App>
-      <tr className="height-10" />
+    <App title="Ask">
+      <tr className="height-6" />
       {data.edges.map((x, idx) => (
         <NewsItems
           key={x.node.id}
@@ -25,7 +25,7 @@ function IndexPage() {
           <tr>
             <td colSpan={2} />
             <td className="text-10pt text--grey">
-              <Link href={`/?p=${data.nextPage}`}>
+              <Link href={`?p=${data.nextPage}`}>
                 <A>More</A>
               </Link>
             </td>
@@ -36,4 +36,4 @@ function IndexPage() {
   )
 }
 
-export default withApollo(IndexPage)
+export default withApollo(AskPage)

@@ -14,7 +14,7 @@
     "skipLibCheck": true,
     "strict": false,
     "target": "es5",
-    "typeRoots": ["@types", "node_modules/@types"]
+    "typeRoots": ["src/@types", "node_modules/@types"]
   },
   "exclude": ["dist", ".next", "out", "node_modules"],
   "include": ["next-env.d.ts", "src"]
