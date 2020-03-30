@@ -6,6 +6,12 @@ A Hacker News Clone app built with next.js, react and apollo-graphql.
 
 I wanna use next.js and apollo-graphql together, so I created this project.
 
+### Implementation pages
+
+except `/front`, `/login`, `/from`, `/hide`, `/upvote` and `reply` (HackerNews does not provide API), others pages have been implemented.
+
+[Live demo](https://next-gql-hnpwa.now.sh/)
+
 ## Built With
 
 - [react.js](https://reactjs.org/)
