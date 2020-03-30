@@ -79,7 +79,7 @@ export const resolvers = {
 
   PageInfo: {
     hasPreviousPage: ({ first }) => first > 0,
-    hasNextPage: ({ ids, limit }) => ids * limit < ids.length,
+    hasNextPage: ({ first, limit, ids }) => first * limit < ids.length,
     totalPageCount: ({ ids }) => Math.floor(ids.length / POSTS_PER_PAGE) + 1,
   },
 
