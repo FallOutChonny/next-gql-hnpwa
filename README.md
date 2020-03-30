@@ -1,6 +1,6 @@
 # Next-graphql-pwa
 
-A Hacker News Clone app built with next.js, react and apollo-graphql.
+A Hacker News Clone pwa app built with next.js, react and apollo-graphql.
 
 ## About this project
 
