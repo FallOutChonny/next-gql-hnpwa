@@ -26,7 +26,7 @@ export default function AppHeader({
               <td className="pr-4 width-18">
                 <Link
                   href="/"
-                  title={<Logo src="/y18.gif" />}
+                  title={<Logo src="/y18.gif" alt="logo" />}
                   segment={false}
                 />
               </td>

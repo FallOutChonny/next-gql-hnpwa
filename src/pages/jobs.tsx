@@ -17,7 +17,7 @@ function JobsPage() {
         <td />
         <td>
           <span>
-            <img src="/s.gif" alt="" width={14} height={1} />
+            <img src="/s.gif" alt="gap" width={14} height={1} />
           </span>
         </td>
         <td className="text--grey">
