@@ -113,6 +113,14 @@ export default createGlobalStyle`
     text-decoration: underline;
   }
 
+  .no--underline {
+    text-decoration: none;
+  }
+
+  a.no--underline:hover {
+    text-decoration: none;
+  }
+
   .text-600 {
     font-weight: 600;
   }

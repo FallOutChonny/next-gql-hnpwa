@@ -6,10 +6,10 @@ import { withApollo } from '../graphql/client'
 import { useNewsItemsWithComments } from '../graphql/news-items'
 
 function NewsItemsPage() {
-  const { data } = useNewsItemsWithComments()
+  const { data, loading } = useNewsItemsWithComments()
 
   return (
-    <App title={data.title}>
+    <App title={data.title} loading={loading}>
       <tr className="height-10" title={data.title} />
       <tr>
         <td>

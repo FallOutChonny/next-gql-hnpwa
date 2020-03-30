@@ -2,9 +2,11 @@ import React from 'react'
 import Divider from 'components/divider'
 import Link from 'components/link'
 
+const linkCls = 'text--grey no--underline'
+
 export default function AppFooter() {
   return (
-    <tr className="nav">
+    <tr>
       <td>
         <img src="/s.gif" height={10} width={0} alt="nav" />
         <table className="width--full" cellSpacing={0} cellPadding={1}>
@@ -16,21 +18,37 @@ export default function AppFooter() {
         </table>
         <br />
         <center>
+          <a className={linkCls} href="https://www.ycombinator.com/apply/">
+            Applications are open for YC Summer 2020
+          </a>
+        </center>
+        <br />
+        <center>
           <div className="text-8pt">
             <Link href="/newsguidelines" title="Guidelines" />
             <Link href="/newsfaq" title="FAQ" />
-            <a href="mailto:hn@ycombinator.com">Support</a>
+            <a className={linkCls} href="mailto:hn@ycombinator.com">
+              Support
+            </a>
             <Divider />
-            <a href="https://github.com/HackerNews/API">API</a>
+            <a className={linkCls} href="https://github.com/HackerNews/API">
+              API
+            </a>
             <Divider />
             <Link href="/security" title="Security" />
             <Link href="/lists" title="Lists" />
-            <Link href="/libookmarkletsts" title="Bookmarklet" />
-            <a href="http://www.ycombinator.com/legal/">Legal</a>
+            <Link href="/bookmarklet" title="Bookmarklet" />
+            <a className={linkCls} href="http://www.ycombinator.com/legal/">
+              Legal
+            </a>
             <Divider />
-            <a href="http://www.ycombinator.com/apply/">Apply to YC</a>
+            <a className={linkCls} href="http://www.ycombinator.com/apply/">
+              Apply to YC
+            </a>
             <Divider />
-            <a href="mailto:hn@ycombinator.com">Contact</a>
+            <a className={linkCls} href="mailto:hn@ycombinator.com">
+              Contact
+            </a>
           </div>
           <form
             method="get"

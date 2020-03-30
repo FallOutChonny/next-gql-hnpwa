@@ -1,12 +1,11 @@
-import gql from 'graphql-tag'
-import { pathOr } from 'ramda'
+import pathOr from 'lodash.get'
 import { useRouter } from 'next/router'
-import { useQuery } from '@apollo/react-hooks'
-// import fetch from 'isomorphic-unfetch'
+import { useQuery, gql } from '@apollo/client'
+import { NewsItems, QueryResult, nullQueryResult } from '../constants/types'
 import { fetchUser, fetchNewsItems } from '../utils/hn-data-api'
-// import { HN_ALGOLIA_API_URL } from '../config'
 import { getEnDate, formatDate } from '../utils/webHelper'
-import { newsItemsFragment } from './typeDefs'
+import { POSTS_PER_PAGE } from '../config'
+import { newsItemsFragment, newsItemsConnectionFragment } from './queries'
 
 export type User = {
   id: number
@@ -33,22 +32,34 @@ export const typeDefs = /* GraphQL */ `
 
   extend type Query {
     user(name: String): User!
+    userPosts(first: Int, name: String, isThreads: Boolean): NewsItemsConnection
   }
 `
 
 export const resolvers = {
   Query: {
     user: async (_, { name }) => await fetchUser(name),
-
-    // userComments: async (_, { name }) => {},
+    userPosts: async (_, { name, first, isThreads }) => ({
+      first,
+      ids: await fetchUser(name)
+        .then(({ submitted }) =>
+          Promise.all<NewsItems>(submitted.map(id => fetchNewsItems(id))),
+        )
+        .then(newsItems =>
+          newsItems
+            .filter(Boolean)
+            .filter(x =>
+              isThreads ? x.type === 'comment' : x.type !== 'comment',
+            )
+            .map(x => x.id),
+        ),
+      limit: POSTS_PER_PAGE,
+    }),
   },
 
   User: {
-    // convert to Month(EN) DD, YYYY
     createdEN: (user: User) => getEnDate(new Date(user.created * 1000)),
-    // convert to YYYY-MM-DD
     createdYYYYMMDD: (user: User) => formatDate(new Date(user.created * 1000)),
-    // get user posts
     submitted: (user: User) => user.submitted.map(id => fetchNewsItems(id)),
   },
 }
@@ -75,6 +86,40 @@ export const userQuery = gql`
   ${newsItemsFragment}
 `
 
+export const userPostsQuery = gql`
+  query UserPosts($first: Int, $name: String, $isThreads: Boolean) {
+    userPosts(first: $first, name: $name, isThreads: $isThreads) {
+      ...NewsItemsConnectionFields
+      edges {
+        cursor
+        node {
+          ...NewsItemsFields
+          kids {
+            ...NewsItemsFields
+            kids {
+              ...NewsItemsFields
+              kids {
+                ...NewsItemsFields
+                kids {
+                  ...NewsItemsFields
+                  kids {
+                    ...NewsItemsFields
+                    kids {
+                      ...NewsItemsFields
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  ${newsItemsConnectionFragment}
+  ${newsItemsFragment}
+`
+
 export const useUser = () => {
   const { query } = useRouter()
 
@@ -83,7 +128,34 @@ export const useUser = () => {
   })
 
   return {
-    data: pathOr({}, ['user'], data) as User,
+    data: pathOr(data, ['user'], {}) as User,
+    ...others,
+  }
+}
+
+export const useUserPosts = ({ feed }: { feed?: string } = {}) => {
+  const { query } = useRouter()
+  const first = +pathOr(query, ['p'], 1)
+
+  const { data, ...others } = useQuery<{ userPosts: QueryResult<NewsItems> }>(
+    userPostsQuery,
+    {
+      variables: {
+        name: query.id,
+        first,
+        isThreads: feed === 'comment',
+      },
+    },
+  )
+
+  return {
+    data: {
+      ...(pathOr(data, ['userPosts'], nullQueryResult) as QueryResult<
+        NewsItems
+      >),
+      nextPage: first + 1,
+      startIndex: (first - 1) * POSTS_PER_PAGE,
+    },
     ...others,
   }
 }

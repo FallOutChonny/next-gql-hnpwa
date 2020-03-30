@@ -14,7 +14,7 @@ const UpvoteShape = styled.div`
 export default function Upvote({ id }: { id: number }) {
   return (
     <center>
-      <Link href={`/vote?item=${id}`}>
+      <Link href={`/vote?item=${id}`} prefetch={false}>
         <A id={`up_${id}`}>
           <UpvoteShape />
         </A>

@@ -1,10 +1,13 @@
 import React from 'react'
 import { NewsItems } from 'constants/types'
-import Comment from 'components/comment'
+import Comment from 'components/comment-with-footer'
 
-export default function CommentList({ data }: { data: NewsItems }) {
-  let rows: JSX.Element[] = []
+type Props = {
+  render?: (rows: JSX.Element[]) => JSX.Element
+  data: NewsItems
+}
 
+export default function CommentList({ data, render }: Props) {
   const renderChild = (comment: NewsItems, lvl: number) => {
     rows.push(<Comment key={comment.id} data={comment} lvl={lvl} />)
 
@@ -13,11 +16,14 @@ export default function CommentList({ data }: { data: NewsItems }) {
     }
   }
 
+  let rows: JSX.Element[] = []
+
   rows.push(<Comment key={data.id} data={data} />)
 
   if (data.kids) {
     data.kids.forEach(comment => renderChild(comment, 1))
   }
 
-  return <>{rows}</>
+  // pass custom props into <Comment /> with render props
+  return render ? render(rows) : <>{rows}</>
 }

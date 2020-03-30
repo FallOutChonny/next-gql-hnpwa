@@ -1,21 +1,23 @@
 import React from 'react'
 import Link from 'next/link'
 import App from 'components/app'
-import Upvote from 'components/upvote'
 import A from 'components/anchor-link'
-import CommentText from 'components/comment-text'
-import { timeSince } from 'utils/webHelper'
-import { useNewComments, Comment } from '../graphql/new-comments'
+import Comment from 'components/comment'
+import { useNewComments } from '../graphql/new-comments'
 import { withApollo } from '../graphql/client'
 
 function NewCommentsPage() {
-  const { data } = useNewComments()
+  const { data, loading } = useNewComments()
+
+  if (process.browser) {
+    console.log(data)
+  }
 
   return (
-    <App title="New Comments">
+    <App title="New Comments" loading={loading}>
       <tr title="New Comments" className="height-10" />
       {data.edges.map(x => (
-        <NewComment key={x.node.id} data={x.node} />
+        <Comment key={x.node.id} data={x.node} />
       ))}
       {data.pageInfo.hasNextPage && (
         <>
@@ -31,49 +33,6 @@ function NewCommentsPage() {
         </>
       )}
     </App>
-  )
-}
-
-const NewComment = ({ data }: { data: Comment }) => {
-  return (
-    <>
-      <tr>
-        <td />
-        <td valign="top">
-          <Upvote id={data.id} />
-        </td>
-        <td className="text--grey text-10pt">
-          <div>
-            <span className="text-8pt">
-              <Link href={`/user?id=${data.id}`}>
-                <A>{data.by}</A>
-              </Link>
-              &nbsp;
-              <span>
-                <Link href={`/user?id=${data.id}`}>
-                  <A>{timeSince(data.time)}</A>
-                </Link>
-              </span>
-              <span id={`unv_${data.id}`} />
-              <span>
-                &nbsp;|&nbsp;
-                <Link href={`/user?id=${data.parent}`}>
-                  <A>parent</A>
-                </Link>
-              </span>
-              <span>
-                &nbsp;| on:&nbsp;
-                <Link href={`/item?id=${data.parent}`}>
-                  <A>{data.title}</A>
-                </Link>
-              </span>
-            </span>
-          </div>
-          <CommentText html={data.text} />
-        </td>
-      </tr>
-      <tr className="height-15" />
-    </>
   )
 }
 

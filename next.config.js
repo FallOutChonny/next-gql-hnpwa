@@ -1,15 +1,25 @@
 const path = require('path')
+const withOffline = require('next-offline')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
 const resolveApp = relativePath => path.resolve(__dirname, relativePath)
 
-module.exports = withBundleAnalyzer({
+const compose = (...funcs) => funcs.reduce((a, b) => (...args) => a(b(...args)))
+
+module.exports = compose(
+  withBundleAnalyzer,
+  withOffline,
+)({
+  workboxOpts: {
+    swDest: 'static/service-worker.js',
+  },
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // Note: we provide webpack above so you should not `require` it
     // Perform customizations to webpack config
     // Important: return the modified config
+
     return {
       ...config,
       resolve: {

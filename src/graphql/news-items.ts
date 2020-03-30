@@ -1,15 +1,10 @@
-import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
-import { useQuery } from '@apollo/react-hooks'
-import { pathOr } from 'ramda'
+import { useQuery, gql } from '@apollo/client'
+import pathOr from 'lodash.get'
 import { POSTS_PER_PAGE } from '../config'
 import { QueryResult, nullQueryResult, NewsItems } from '../constants/types'
-import {
-  fetch,
-  fetchNewsItems,
-  loopFetchNewsItemsComments,
-} from '../utils/hn-data-api'
-import { newsItemsFragment } from './typeDefs'
+import { fetch, fetchNewsItems } from '../utils/hn-data-api'
+import { newsItemsFragment, newsItemsConnectionFragment } from './queries'
 
 export const typeDefs = /* GraphQL */ `
   enum Feed {
@@ -21,6 +16,14 @@ export const typeDefs = /* GraphQL */ `
     best
   }
 
+  enum Story {
+    comment
+    story
+    job
+    poll
+    pollopt
+  }
+
   type NewsItems {
     by: String
     id: ID
@@ -30,6 +33,7 @@ export const typeDefs = /* GraphQL */ `
     title: String
     type: String
     url: String
+    parent: NewsItems
     kids: [NewsItems]
   }
 
@@ -50,70 +54,61 @@ export const typeDefs = /* GraphQL */ `
 
   extend type Query {
     feed(input: NewsItemsInput): NewsItemsConnection
-
     newsItems(id: Int): NewsItems!
   }
 `
 
 export const resolvers = {
   Query: {
-    feed: async (_, { input: { first = 1, feed } }) => {
-      const limit = POSTS_PER_PAGE
-
-      const ids: number[] = await fetch(`${feed}stories`)
-
-      return {
-        edges: await Promise.all(
-          ids.slice((first - 1) * limit, first * limit).map(async id => {
-            const items = await fetchNewsItems(id)
-
-            return {
-              cursor: Buffer.from(`${items.time}`).toString('base64'),
-              node: {
-                ...items,
-                kids: pathOr([], ['kids'], items).map(id => ({ id })),
-              },
-            }
-          }),
-        ),
-        pageInfo: {
-          hasNextPage: first * limit < ids.length,
-          totalPageCount: Math.floor(ids.length / limit) + 1,
-        },
-      }
-    },
-
-    newsItems: async (_, { id }) => {
-      return await loopFetchNewsItemsComments(await fetchNewsItems(id))
-    },
+    feed: async (_, { input: { first = 1, feed } }) => ({
+      first,
+      ids: await fetch(`${feed}stories`),
+      limit: POSTS_PER_PAGE,
+    }),
+    newsItems: async (_, { id }) => await fetchNewsItems(id),
   },
 
-  // For the performance, dont enable nested news-items query
-  // NewsItems: {
-  //   kids: async (newsItems: NewsItems) => fetchNewsItems(newsItems.id),
-  //   by: async (newsItems: NewsItems) => fetchUser(newsItems.by),
-  // },
+  NewsItemsConnection: {
+    edges: async ({ ids, first, limit }) => {
+      return ids
+        .slice((first - 1) * limit, first * limit)
+        .map(id => fetchNewsItems(id))
+    },
+    pageInfo: data => data,
+  },
+
+  PageInfo: {
+    hasPreviousPage: ({ first }) => first > 0,
+    hasNextPage: ({ ids, limit }) => ids * limit < ids.length,
+    totalPageCount: ({ ids }) => Math.floor(ids.length / POSTS_PER_PAGE) + 1,
+  },
+
+  NewsItemsEdge: {
+    cursor: (newsItems: NewsItems) => {
+      return Buffer.from(`${newsItems.time}`).toString('base64')
+    },
+    node: (newsItems: NewsItems) => newsItems,
+  },
+
+  NewsItems: {
+    parent: async (newsItems: NewsItems) => {
+      // While fetching on the apollo server, parent type is number
+      return newsItems.parent ? fetchNewsItems(newsItems.parent as any) : null
+    },
+    kids: async (newsItems: NewsItems) => {
+      return (newsItems.kids || []).map(id => fetchNewsItems(id as any))
+    },
+    // by: async (newsItems: NewsItems) => fetchUser(newsItems.by),
+  },
 }
 
 const newsItemsQuery = gql`
   query Feed($input: NewsItemsInput) {
     feed(input: $input) {
-      edges {
-        cursor
-        node {
-          ...NewsItemsFields
-          kids {
-            id
-            __typename
-          }
-        }
-      }
-      pageInfo {
-        hasNextPage
-        totalPageCount
-      }
+      ...NewsItemsConnectionFields
     }
   }
+  ${newsItemsConnectionFragment}
   ${newsItemsFragment}
 `
 
@@ -147,7 +142,7 @@ const newsItemsWithCommentsQuery = gql`
 
 export const useNewsItems = ({ feed }: { feed?: string } = {}) => {
   const { query } = useRouter()
-  const first = +pathOr(1, ['p'], query)
+  const first = +pathOr(query, ['p'], 1)
 
   const { data, ...others } = useQuery<{ newsItems: QueryResult<NewsItems> }>(
     newsItemsQuery,
@@ -160,7 +155,7 @@ export const useNewsItems = ({ feed }: { feed?: string } = {}) => {
 
   return {
     data: {
-      ...(pathOr(nullQueryResult, ['feed'], data) as QueryResult<NewsItems>),
+      ...(pathOr(data, ['feed'], nullQueryResult) as QueryResult<NewsItems>),
       nextPage: first + 1,
       startIndex: (first - 1) * POSTS_PER_PAGE,
     },
@@ -179,7 +174,7 @@ export const useNewsItemsWithComments = () => {
   )
 
   return {
-    data: pathOr({ kids: [] }, ['newsItems'], data) as NewsItems,
+    data: pathOr(data, ['newsItems'], { kids: [] }) as NewsItems,
     ...others,
   }
 }

@@ -1,10 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
-import { ApolloProvider } from '@apollo/react-hooks'
-import { ApolloClient } from 'apollo-client'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { ErrorResponse } from 'apollo-link-error'
-import { dev } from '../config'
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
+import { ErrorResponse } from '@apollo/link-error'
+import { dev, GRAPHQL_URL } from '../config'
 
 let globalApolloClient = null
 
@@ -138,13 +136,12 @@ function createApolloClient(initialState = {}) {
 
 function createIsomorphLink() {
   if (typeof window === 'undefined') {
-    const { SchemaLink } = require('apollo-link-schema')
+    const { SchemaLink } = require('@apollo/link-schema')
     const { schema } = require('./schema')
     return new SchemaLink({ schema })
   } else {
-    const { from } = require('apollo-link')
-    const { HttpLink } = require('apollo-link-http')
-    const { onError } = require('apollo-link-error')
+    const { from, HttpLink } = require('@apollo/client')
+    const { onError } = require('@apollo/link-error')
 
     const errorLink = onError(
       ({ graphQLErrors, networkError }: ErrorResponse) => {
@@ -163,7 +160,7 @@ function createIsomorphLink() {
     return from([
       errorLink,
       new HttpLink({
-        uri: '/graphql',
+        uri: GRAPHQL_URL,
         credentials: 'same-origin',
       }),
     ])

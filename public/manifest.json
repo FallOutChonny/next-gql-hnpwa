@@ -1,0 +1,26 @@
+{
+  "short_name": "HN clone",
+  "name": "Hacker News Clone",
+  "description": "Hacker news clone app built with react, next.js and apollo graphql",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "96*96 64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo160.png",
+      "type": "image/png",
+      "sizes": "160x160"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "display": "fullscreen",
+  "start_url": "/",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

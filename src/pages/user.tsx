@@ -9,8 +9,6 @@ import { useUser } from '../graphql/user'
 function UserPage() {
   const { data } = useUser()
 
-  console.log(data)
-
   return (
     <App title={`Profile: ${data.id}`} isFooterVisible={false}>
       <tr className="height-10" title={`Profile: ${data.id}`} />

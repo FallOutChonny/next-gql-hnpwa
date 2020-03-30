@@ -2,14 +2,20 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import Link from 'components/link'
+import Divider from 'components/divider'
+import A from 'components/anchor-link'
 
-export default function AppHeader() {
+export default function AppHeader({
+  extra,
+}: {
+  extra?: React.ReactNode | string
+}) {
   const { pathname } = useRouter()
 
   const cx = (path: string) => (pathname === path ? 'text-white' : '')
 
   return (
-    <tr className="nav nav__header">
+    <tr>
       <td className="bg--orange">
         <table
           className="width--full border--none pt-1 pr-2 pl-2"
@@ -42,12 +48,20 @@ export default function AppHeader() {
                   <Link title="ask" href="/ask" className={cx('/ask')} />
                   <Link title="show" href="/show" className={cx('/show')} />
                   <Link title="jobs" href="/jobs" className={cx('/jobs')} />
-                  <Link title="submit" href="/submit" segment={false} />
+                  <A className="text-dark no--underline">submit</A>
+                  {extra ? (
+                    <span className="text-white">
+                      <Divider />
+                      {extra}
+                    </span>
+                  ) : (
+                    ''
+                  )}
                 </span>
               </td>
               <td className="text-right pr-4">
-                <span className="text-dark">
-                  <Link title="login" href="/login?goto=ask" segment={false} />
+                <span>
+                  <A className="text-dark no--underline">login</A>
                 </span>
               </td>
             </tr>

@@ -8,10 +8,10 @@ import { withApollo } from '../graphql/client'
 import { useNewsItems } from '../graphql/news-items'
 
 function IndexPage() {
-  const { data } = useNewsItems({ feed: Feed.TOP })
+  const { data, loading } = useNewsItems({ feed: Feed.TOP })
 
   return (
-    <App>
+    <App loading={loading}>
       <tr className="height-10" />
       {data.edges.map((x, idx) => (
         <NewsItems

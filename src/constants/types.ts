@@ -4,6 +4,7 @@ export enum Feed {
   JOB = 'job',
   SHOW = 'show',
   NEWEST = 'new',
+  BEST = 'best',
 }
 
 export type NewsItems = {
@@ -14,7 +15,7 @@ export type NewsItems = {
   time: number
   text: string
   dead: boolean
-  parent: number
+  parent: NewsItems
   poll: number
   kids: NewsItems[]
   url: string

@@ -8,10 +8,10 @@ import { withApollo } from '../graphql/client'
 import { useNewsItems } from '../graphql/news-items'
 
 function AskPage() {
-  const { data } = useNewsItems({ feed: Feed.ASK })
+  const { data, loading } = useNewsItems({ feed: Feed.ASK })
 
   return (
-    <App title="Ask">
+    <App title="Ask" loading={loading}>
       <tr className="height-6" />
       {data.edges.map((x, idx) => (
         <NewsItems

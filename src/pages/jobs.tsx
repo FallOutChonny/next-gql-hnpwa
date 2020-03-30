@@ -8,10 +8,10 @@ import { withApollo } from '../graphql/client'
 import { useNewsItems } from '../graphql/news-items'
 
 function JobsPage() {
-  const { data } = useNewsItems({ feed: Feed.JOB })
+  const { data, loading } = useNewsItems({ feed: Feed.JOB })
 
   return (
-    <App title="jobs">
+    <App title="jobs" loading={loading}>
       <tr className="height-16" />
       <tr>
         <td />

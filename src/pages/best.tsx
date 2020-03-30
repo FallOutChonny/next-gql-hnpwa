@@ -7,11 +7,11 @@ import { Feed } from 'constants/types'
 import { withApollo } from '../graphql/client'
 import { useNewsItems } from '../graphql/news-items'
 
-function NewestPage() {
-  const { data, loading } = useNewsItems({ feed: Feed.NEWEST })
+function BestPage() {
+  const { data, loading } = useNewsItems({ feed: Feed.BEST })
 
   return (
-    <App title="New Links" loading={loading}>
+    <App loading={loading} title="Top Links" extra="best">
       <tr className="height-10" />
       {data.edges.map((x, idx) => (
         <NewsItems
@@ -25,7 +25,7 @@ function NewestPage() {
           <tr>
             <td colSpan={2} />
             <td className="text-10pt text--grey">
-              <Link href={`/newest?p=${data.nextPage}`}>
+              <Link href={`/?p=${data.nextPage}`}>
                 <A>More</A>
               </Link>
             </td>
@@ -36,4 +36,4 @@ function NewestPage() {
   )
 }
 
-export default withApollo(NewestPage)
+export default withApollo(BestPage)

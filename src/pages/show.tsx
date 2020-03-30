@@ -8,10 +8,10 @@ import { withApollo } from '../graphql/client'
 import { useNewsItems } from '../graphql/news-items'
 
 function ShowHNPage() {
-  const { data } = useNewsItems({ feed: Feed.SHOW })
+  const { data, loading } = useNewsItems({ feed: Feed.SHOW })
 
   return (
-    <App title="Show">
+    <App title="Show" loading={loading}>
       <tr className="height-16" />
       <tr>
         <td colSpan={2} />

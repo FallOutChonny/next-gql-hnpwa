@@ -10,3 +10,5 @@ export const HN_ALGOLIA_API_URL = 'http://hn.algolia.com/api/v1'
 export const HN_API_VERSION = process.env.HN_API_VERSION || '/v0'
 
 export const POSTS_PER_PAGE = 30
+
+export const GRAPHQL_URL = '/api/graphql'

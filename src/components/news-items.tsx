@@ -12,6 +12,7 @@ type Props = {
 }
 
 export default function NewsItemsIndex({ data, isRankVisible = true }: Props) {
+  // the fields of job story is different
   const isJobStories = data.type === Feed.JOB
 
   return (
@@ -55,7 +56,7 @@ export default function NewsItemsIndex({ data, isRankVisible = true }: Props) {
               </span>
               <span id={`unv_${data.id}`}>
                 &nbsp;|&nbsp;
-                <Link href={`/hide?id=${data.id}`}>
+                <Link href={`/hide?id=${data.id}`} prefetch={false}>
                   <A>hide</A>
                 </Link>
                 &nbsp;|&nbsp;
