@@ -18,10 +18,10 @@ except `/front`, `/login`, `/from`, `/hide`, `/upvote` and `reply` (HackerNews d
 - [next.js](https://rometools.github.io/rome/) - The react framework used
 - [styled-components](http://www.dropwizard.io/1.0.2/docs/) - CSS-in-JS styling framework
 - [apollo-GraphQL](https://www.apollographql.com/) - Implementation of GraphQL that can transfer data between server and client
-- [pwa](https://github.com/hanford/next-offline) - Offline support with (next-offline)[https://github.com/hanford/next-offline]
+- [pwa](https://github.com/hanford/next-offline) - Offline support with [next-offline](https://github.com/hanford/next-offline)
 - [prettier](https://prettier.io/) - Auto format code with commit hooks
 - [typescript](https://www.typescriptlang.org/) - typed superset of JavaScript
-- [eslint](https://eslint.org/) - The linter rules I used are maintained by (create-react-app)[https://github.com/facebook/create-react-app/blob/master/packages/eslint-config-react-app/index.js]
+- [eslint](https://eslint.org/) - The linter rules I used are maintained by [create-react-app](https://github.com/facebook/create-react-app/blob/master/packages/eslint-config-react-app/index.js)
 
 ### Development
 
