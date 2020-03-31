@@ -12,7 +12,7 @@ export default function AppFooter() {
         <table className="width--full" cellSpacing={0} cellPadding={1}>
           <tbody>
             <tr>
-              <td className="bg--orange"></td>
+              <td className="bg--orange" />
             </tr>
           </tbody>
         </table>
