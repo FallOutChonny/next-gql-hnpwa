@@ -1,6 +1,13 @@
 import { createGlobalStyle, css } from 'styled-components'
 import { theme } from 'utils/theme'
 
+const device = {
+  mobileS: `(max-width: 320px)`,
+  mobileM: `(max-width: 375px)`,
+  mobileL: `(max-width: 425px)`,
+  tablet: `(max-width: 768px)`,
+}
+
 export default createGlobalStyle`
   body {
     font-family: Verdana, Geneva, sans-serif;
@@ -89,24 +96,38 @@ export default createGlobalStyle`
     color: #fff !important;
   }
 
-  .text-7pt {
-    font-size: 7pt;
+  .text-dark {
+    color: #000;
   }
 
-  .text-9pt {
-    font-size: 9pt;
+  .text-7pt {
+    font-size: 7pt;
   }
 
   .text-8pt {
     font-size: 8pt;
   }
 
+  .text-9pt {
+    font-size: 9pt;
+  }
+
   .text-10pt {
     font-size: 10pt;
   }
 
-  .text-dark {
-    color: #000;
+  @media ${device.tablet} {
+    .text-7pt {
+      font-size: 12px;
+    }
+
+    .text-8pt {
+      font-size: 12px;
+    }
+  }
+
+  .text-600 {
+    font-weight: 600;
   }
 
   .text-underline {
@@ -119,10 +140,6 @@ export default createGlobalStyle`
 
   a.no--underline:hover {
     text-decoration: none;
-  }
-
-  .text-600 {
-    font-weight: 600;
   }
 
   .border--none {

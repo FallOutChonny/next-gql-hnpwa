@@ -61,7 +61,6 @@ export default function NewsItemsIndex({ data, isRankVisible = true }: Props) {
                 </Link>
                 &nbsp;|&nbsp;
               </span>
-              <span id={`unv_${data.id}`} />
               <Link href={`/item?id=${data.id}`}>
                 <A>{(data.kids || []).length} comments</A>
               </Link>

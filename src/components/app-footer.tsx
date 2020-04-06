@@ -54,8 +54,12 @@ export default function AppFooter() {
             method="get"
             className="mt-15 m-block-end--1em"
             action="//hn.algolia.com/">
-            <span className="mr-5">Search:</span>
+            <label htmlFor="search" className="mr-5 text--grey">
+              Search:
+            </label>
             <input
+              id="search"
+              type="text"
               name="q"
               size={17}
               autoCorrect="off"

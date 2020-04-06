@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Footer from 'components/app-footer'
 import Header from 'components/app-header'
 import GlobalStyles from 'components/global-styles'
+import theme from 'utils/theme'
 // import Spin from 'components/spin'
 
 type Props = {
@@ -46,7 +47,7 @@ export default function App({
         <meta name="referrer" content="origin" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="title" content="Hacker News Clone" />
-        <meta name="theme-color" content="#72B340" />
+        <meta name="theme-color" content={theme.orange} />
         <meta
           name="description"
           content="Hacker news clone app built with react, next.js and apollo graphql"
