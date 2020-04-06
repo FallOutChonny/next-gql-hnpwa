@@ -26,7 +26,7 @@ export default function AppHeader({
               <td className="pr-4 width-18">
                 <Link
                   href="/"
-                  title={<Logo src="/y18.gif" alt="logo" />}
+                  title={<Logo src="/y18.gif" alt="Hacker News PWA App" />}
                   segment={false}
                 />
               </td>

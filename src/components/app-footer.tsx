@@ -8,7 +8,7 @@ export default function AppFooter() {
   return (
     <tr>
       <td>
-        <img src="/s.gif" height={10} width={0} alt="nav" />
+        <img src="/s.gif" height={10} width={0} alt="Hacker News PWA App" />
         <table className="width--full" cellSpacing={0} cellPadding={1}>
           <tbody>
             <tr>

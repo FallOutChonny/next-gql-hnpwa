@@ -75,7 +75,7 @@ export default function StaticPage({
               <td css={{ background: '#fafaf0' }}>
                 <Link href="/">
                   <A>
-                    <img src="/yc500.gif" alt="logo" />
+                    <img src="/yc500.gif" alt="Hacker News PWA App" />
                   </A>
                 </Link>
                 <div css={{ marginTop: 12 }} />

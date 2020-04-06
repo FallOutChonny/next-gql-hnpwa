@@ -29,7 +29,12 @@ export default function CommentWithFooter({
           <tbody>
             <tr>
               <td>
-                <img src="/s.gif" height={1} width={lvl * 40} alt="s" />
+                <img
+                  src="/s.gif"
+                  height={1}
+                  width={lvl * 40}
+                  alt="Hacker News PWA App"
+                />
               </td>
               <td valign="top">
                 <Upvote id={data.id} />

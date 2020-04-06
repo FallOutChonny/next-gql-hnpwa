@@ -37,10 +37,20 @@ function ThreadsPage() {
                 <tbody>
                   <tr>
                     <td>
-                      <img src="/s.gif" height={1} width={0} alt="s" />
+                      <img
+                        src="/s.gif"
+                        height={1}
+                        width={0}
+                        alt="Hacker News PWA App"
+                      />
                     </td>
                     <td>
-                      <img src="/s.gif" height={1} width={14} alt="s" />
+                      <img
+                        src="/s.gif"
+                        height={1}
+                        width={14}
+                        alt="Hacker News PWA App"
+                      />
                     </td>
                     <td>
                       <Link href={`/threads?id=${query.id}&p=${data.nextPage}`}>
