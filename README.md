@@ -3,9 +3,11 @@
 A Hacker News Clone PWA App built with next.js, react and apollo-graphql.
 
 Desktop
+
 ![Hacker News Clone PWA App](lighthouse-desktop.png)
 
 Mobile
+
 ![Hacker News Clone PWA App](lighthouse-mobile.png)
 
 ## About this project
