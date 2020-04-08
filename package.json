@@ -13,11 +13,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@apollo/client": "^3.0.0-beta.41",
+    "@apollo/client": "^3.0.0-beta.43",
     "@apollo/link-error": "^2.0.0-beta.3",
     "@apollo/link-schema": "^2.0.0-beta.3",
     "@apollo/react-ssr": "4.0.0-beta.1",
-    "apollo-server-micro": "^2.11.0",
+    "apollo-server-micro": "^2.12.0",
     "firebase": "^7.13.2",
     "graphql": "^15.0.0",
     "graphql-tools": "^4.0.7",
@@ -26,9 +26,9 @@
     "lodash.merge": "^4.6.2",
     "next": "^9.3.4",
     "next-offline": "^5.0.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "styled-components": "^5.0.1"
+    "react": "^0.0.0-experimental-d7382b6c4",
+    "react-dom": "^0.0.0-experimental-d7382b6c4",
+    "styled-components": "^5.1.0"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^9.3.4",
@@ -38,8 +38,8 @@
     "@types/react": "^16.9.32",
     "@types/react-dom": "^16.9.6",
     "@types/styled-components": "^5.0.1",
-    "@typescript-eslint/eslint-plugin": "^2.25.0",
-    "@typescript-eslint/parser": "^2.25.0",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
     "babel-plugin-styled-components": "^1.10.7",
     "eslint": "^6.8.0",
     "eslint-plugin-import": "^2.20.2",
@@ -49,7 +49,7 @@
     "husky": "^4.2.3",
     "lint-staged": "^10.1.2",
     "nodemon": "^2.0.2",
-    "prettier": "^2.0.3",
+    "prettier": "^2.0.4",
     "typescript": "^3.8.3"
   },
   "husky": {
