@@ -1,3 +1,5 @@
 import React from 'react'
 
-export default () => <span> | </span>
+const Divider = () => <span> | </span>
+
+export default Divider
