@@ -110,10 +110,7 @@ export const resolvers = {
 
   Comment: {
     // time: (comment: Comment) => new Date(comment.time),
-    parent: async (comment: Comment) => {
-      console.log(comment)
-      return fetchNewsItems(comment.parent as any)
-    },
+    parent: async (comment: Comment) => fetchNewsItems(comment.parent as any),
   },
 }
 
