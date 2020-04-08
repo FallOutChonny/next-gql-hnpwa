@@ -100,6 +100,10 @@ export default createGlobalStyle`
     color: #000;
   }
 
+  .text-normal {
+    color: inherit;
+  }
+
   .text-7pt {
     font-size: 7pt;
   }

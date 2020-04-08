@@ -1,9 +1,9 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import App from 'components/app'
 import NewsItemsIndex from 'components/news-items'
-import A from 'components/anchor-link'
+import ReadMoreLink from 'components/read-more-link'
+import Spacer from 'components/spacer'
 import { withApollo } from '../graphql/client'
 import { useUserPosts } from '../graphql/user'
 
@@ -16,23 +16,20 @@ function SubmittedPage() {
 
   return (
     <App title={title} loading={loading} extra={title}>
-      <tr className="height-10" title={title} />
+      <Spacer title={title} />
       {data.edges.map((x, idx) => (
         <NewsItemsIndex
           key={x.node.id}
           data={{ ...x.node, rank: idx + data.startIndex + 1 }}
         />
       ))}
-      {data.pageInfo.hasNextPage && (
-        <tr>
-          <td colSpan={2} />
-          <td>
-            <Link href={`/submitted?id=${query.id}&p=${data.nextPage}`}>
-              <A className="text-dark">More</A>
-            </Link>
-          </td>
-        </tr>
-      )}
+      <ReadMoreLink
+        url={`/submitted?id=${query.id}&p=${data.nextPage}`}
+        visible={data.pageInfo.hasNextPage}
+        wrapperClassName="text-normal"
+        className="text-dark"
+        space={false}
+      />
     </App>
   )
 }

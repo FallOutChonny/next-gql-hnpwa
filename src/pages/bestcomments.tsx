@@ -1,11 +1,11 @@
 import React from 'react'
 import { useQuery, gql } from '@apollo/client'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import pathOr from 'lodash.get'
 import App from 'components/app'
 import Comment from 'components/comment'
-import A from 'components/anchor-link'
+import ReadMoreLink from 'components/read-more-link'
+import Spacer from 'components/spacer'
 import { POSTS_PER_PAGE } from '../config'
 import { QueryResult, NewsItems, nullQueryResult } from 'constants/types'
 import { withApollo } from '../graphql/client'
@@ -58,23 +58,14 @@ function BestCommentsPage() {
 
   return (
     <App loading={loading} title="Best Comments" extra="best comments">
-      <tr className="height-10" />
-      {data.edges.map((x, idx) => (
+      <Spacer />
+      {data.edges.map(x => (
         <Comment key={x.node.id} data={x.node} />
       ))}
-      {data.pageInfo.hasNextPage && (
-        <>
-          <tr className="height-10" />
-          <tr>
-            <td colSpan={2} />
-            <td className="text-10pt text--grey">
-              <Link href={`/?p=${data.nextPage}`}>
-                <A>More</A>
-              </Link>
-            </td>
-          </tr>
-        </>
-      )}
+      <ReadMoreLink
+        visible={data.pageInfo.hasNextPage}
+        url={`/bestcomments?p=${data.nextPage}`}
+      />
     </App>
   )
 }

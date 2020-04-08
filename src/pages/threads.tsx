@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import App from 'components/app'
 import A from 'components/anchor-link'
+import Spacer from 'components/spacer'
 import CommentList from 'components/comment-list'
 import { useUserPosts } from '../graphql/user'
 import { withApollo } from '../graphql/client'
@@ -16,7 +17,7 @@ function ThreadsPage() {
 
   return (
     <App title={title} loading={loading} extra={title}>
-      <tr className="height-10" title={title} />
+      <Spacer title={title} />
       {data.edges.map(comment => (
         <CommentList
           key={comment.cursor}
