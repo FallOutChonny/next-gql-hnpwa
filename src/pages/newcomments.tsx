@@ -9,10 +9,6 @@ import { withApollo } from '../graphql/client'
 function NewCommentsPage() {
   const { data, loading } = useNewComments()
 
-  if (process.browser) {
-    console.log(data)
-  }
-
   return (
     <App title="New Comments" loading={loading}>
       <tr title="New Comments" className="height-10" />
