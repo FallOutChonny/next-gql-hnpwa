@@ -26,7 +26,7 @@ export default class App extends NextApp {
       <ErrorBoundary
         fallback={({ error, componentStack }) => (
           <>
-            <h1>Something went wrong.</h1>
+            <p>Something went wrong.</p>
             {error && error.toString()}
             <p style={{ whiteSpace: 'pre-wrap' }}>{componentStack}</p>
           </>
