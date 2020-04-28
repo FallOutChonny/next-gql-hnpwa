@@ -4,7 +4,6 @@ import Footer from 'components/app-footer'
 import Header from 'components/app-header'
 import GlobalStyles from 'components/global-styles'
 import theme from 'utils/theme'
-// import Spin from 'components/spin'
 
 type Props = {
   children: React.ReactNode
@@ -33,14 +32,11 @@ export default function App({
   title,
   children,
   extra,
-  // loading = false,
   isFooterVisible = true,
   isNavVisible = true,
   width = '85%',
   table = {},
 }: Props) {
-  // const isLoading = process.browser && loading
-
   return (
     <>
       <Head>
@@ -72,11 +68,7 @@ export default function App({
                   {...table.props}
                   style={table.style}
                   className="itemlist">
-                  <tbody>
-                    {/* {isLoading && <Spin spin className="mt-10 ml-10" />} */}
-                    {/* {!isLoading ? children : null} */}
-                    {children}
-                  </tbody>
+                  <tbody>{children}</tbody>
                 </table>
               </td>
             </tr>
