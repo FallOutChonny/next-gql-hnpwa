@@ -70,9 +70,11 @@ export const resolvers = {
 
   NewsItemsConnection: {
     edges: async ({ ids, first, limit }) => {
-      return ids
+      const items = await Promise.all(ids.map(id => fetchNewsItems(id)))
+
+      return items
+        .filter(item => item !== null)
         .slice((first - 1) * limit, first * limit)
-        .map(id => fetchNewsItems(id))
     },
     pageInfo: data => data,
   },
