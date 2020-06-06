@@ -17,7 +17,7 @@
     "@apollo/link-error": "^2.0.0-beta.3",
     "@apollo/link-schema": "^2.0.0-beta.3",
     "@apollo/react-ssr": "4.0.0-beta.1",
-    "apollo-server-micro": "^2.12.0",
+    "apollo-server-micro": "^2.14.2",
     "firebase": "^7.14.2",
     "graphql": "^15.0.0",
     "graphql-tools": "^5.0.0",
