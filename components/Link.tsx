@@ -1,7 +1,7 @@
 import React from 'react'
 import NextLink from 'next/link'
-import Divider from '@/components/Divider'
-import A from '@/components/LinkTitle'
+import Divider from '@components/Divider'
+import A from '@components/LinkTitle'
 
 type Props = {
   href: string

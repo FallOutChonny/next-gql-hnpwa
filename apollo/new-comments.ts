@@ -2,9 +2,9 @@ import { useRouter } from 'next/router'
 import fetch from 'isomorphic-unfetch'
 import { useQuery, gql } from '@apollo/client'
 import pathOr from 'lodash.get'
-import { QueryResult, HNQueryResult, nullQueryResult } from '@/config/types'
-import { HN_ALGOLIA_API_URL, POSTS_PER_PAGE } from '@/config/app-config'
-import { fetchNewsItems } from '@/utils/hn-data-api'
+import { QueryResult, HNQueryResult, nullQueryResult } from '@config/types'
+import { HN_ALGOLIA_API_URL, POSTS_PER_PAGE } from '@config/app-config'
+import { fetchNewsItems } from '@utils/hn-data-api'
 
 export type Comment = {
   by: string

@@ -16,10 +16,10 @@
     "target": "esnext",
     "typeRoots": ["@types", "node_modules/@types"],
     "paths": {
-      "@/lib/*": ["lib/*"],
-      "@/config/*": ["config/*"],
-      "@/components/*": ["components/*"],
-      "@/utils/*": ["utils/*"],
+      "@hooks/*": ["hooks/*"],
+      "@config/*": ["config/*"],
+      "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"],
       "@/apollo/*": ["apollo/*"]
     }
   },

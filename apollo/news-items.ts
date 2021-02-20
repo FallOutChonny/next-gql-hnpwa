@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
 import { useQuery, gql } from '@apollo/client'
 import pathOr from 'lodash.get'
-import { POSTS_PER_PAGE } from '@/config/app-config'
-import { QueryResult, nullQueryResult, NewsItems } from '@/config/types'
-import { fetch, fetchNewsItems } from '@/utils/hn-data-api'
+import { POSTS_PER_PAGE } from '@config/app-config'
+import { QueryResult, nullQueryResult, NewsItems } from '@config/types'
+import { fetch, fetchNewsItems } from '@utils/hn-data-api'
 import { newsItemsFragment, newsItemsConnectionFragment } from './queries'
 
 export const typeDefs = /* GraphQL */ `

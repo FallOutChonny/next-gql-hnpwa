@@ -2,8 +2,8 @@ import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import { createGlobalStyle } from 'styled-components'
-import A from '@/components/AnchorLink'
-import theme from '@/utils/theme'
+import A from '@components/AnchorLink'
+import theme from '@utils/theme'
 
 type Props = {
   title?: string

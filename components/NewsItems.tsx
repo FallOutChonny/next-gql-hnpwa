@@ -1,10 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
-import A from '@/components/AnchorLink'
-import Upvote from '@/components/Upvote'
-import LinkTitle from '@/components/LinkTitle'
-import { timeSince, getHostname } from '@/utils/web-helper'
-import { NewsItems, Feed } from '@/config/types'
+import A from '@components/AnchorLink'
+import Upvote from '@components/Upvote'
+import LinkTitle from '@components/LinkTitle'
+import { timeSince, getHostname } from '@utils/web-helper'
+import { NewsItems, Feed } from '@config/types'
 
 type Props = {
   data: NewsItems

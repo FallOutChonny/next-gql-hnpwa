@@ -1,9 +1,9 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
-import Link from '@/components/Link'
-import Divider from '@/components/Divider'
-import A from '@/components/AnchorLink'
+import Link from '@components/Link'
+import Divider from '@components/Divider'
+import A from '@components/AnchorLink'
 
 export default function AppHeader({
   extra,

@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import App from '@/components/App'
-import A from '@/components/AnchorLink'
+import App from '@components/App'
+import A from '@components/AnchorLink'
 
 export default function ListsPage() {
   return (

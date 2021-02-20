@@ -1,7 +1,7 @@
 import React from 'react'
-import App from '@/components/App'
-import NewsItemsIndex from '@/components/NewsItems'
-import CommentList from '@/components/CommentList'
+import App from '@components/App'
+import NewsItemsIndex from '@components/NewsItems'
+import CommentList from '@components/CommentList'
 import { withApollo } from '@/apollo/client'
 import { useNewsItemsWithComments } from '@/apollo/news-items'
 

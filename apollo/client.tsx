@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
 import { ErrorResponse } from '@apollo/link-error'
-import { dev, GRAPHQL_URL } from '@/config/app-config'
+import { dev, GRAPHQL_URL } from '@config/app-config'
 
 let globalApolloClient = null
 

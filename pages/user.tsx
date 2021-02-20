@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import App from '@/components/App'
-import A from '@/components/AnchorLink'
+import App from '@components/App'
+import A from '@components/AnchorLink'
 import { withApollo } from '@/apollo/client'
 import { useUser } from '@/apollo/user'
 

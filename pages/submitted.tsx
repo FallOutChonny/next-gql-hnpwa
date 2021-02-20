@@ -1,9 +1,9 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import App from '@/components/App'
-import NewsItemsIndex from '@/components/NewsItems'
-import ReadMoreLink from '@/components/ReadMoreLink'
-import Spacer from '@/components/Spacer'
+import App from '@components/App'
+import NewsItemsIndex from '@components/NewsItems'
+import ReadMoreLink from '@components/ReadMoreLink'
+import Spacer from '@components/Spacer'
 import { withApollo } from '@/apollo/client'
 import { useUserPosts } from '@/apollo/user'
 

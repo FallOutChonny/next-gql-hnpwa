@@ -1,6 +1,6 @@
 import React from 'react'
-import Divider from '@/components/Divider'
-import Link from '@/components/Link'
+import Divider from '@components/Divider'
+import Link from '@components/Link'
 
 const linkCls = 'text--grey no--underline'
 

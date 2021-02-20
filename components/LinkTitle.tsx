@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import A from '@/components/AnchorLink'
+import A from '@components/AnchorLink'
 
 const LinkTitle = styled(A)`
   color: #000000;

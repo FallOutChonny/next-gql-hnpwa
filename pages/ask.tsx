@@ -1,11 +1,11 @@
 import React from 'react'
-import App from '@/components/App'
-import NewsItems from '@/components/NewsItems'
-import ReadMoreLink from '@/components/ReadMoreLink'
-import Spacer from '@/components/Spacer'
-import { Feed } from '@/config/types'
-import { withApollo } from 'apollo/client'
-import { useNewsItems } from 'apollo/news-items'
+import App from '@components/App'
+import NewsItems from '@components/NewsItems'
+import ReadMoreLink from '@components/ReadMoreLink'
+import Spacer from '@components/Spacer'
+import { Feed } from '@config/types'
+import { withApollo } from '@/apollo/client'
+import { useNewsItems } from '@/apollo/news-items'
 
 function AskPage() {
   const { data, loading } = useNewsItems({ feed: Feed.ASK })

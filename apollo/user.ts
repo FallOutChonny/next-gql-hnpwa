@@ -1,10 +1,10 @@
 import pathOr from 'lodash.get'
 import { useRouter } from 'next/router'
 import { useQuery, gql } from '@apollo/client'
-import { NewsItems, QueryResult, nullQueryResult } from '@/config/types'
-import { fetchUser, fetchNewsItems } from '@/utils/hn-data-api'
-import { getEnDate, formatDate } from '@/utils/web-helper'
-import { POSTS_PER_PAGE } from '@/config/app-config'
+import { NewsItems, QueryResult, nullQueryResult } from '@config/types'
+import { fetchUser, fetchNewsItems } from '@utils/hn-data-api'
+import { getEnDate, formatDate } from '@utils/web-helper'
+import { POSTS_PER_PAGE } from '@config/app-config'
 import { newsItemsFragment, newsItemsConnectionFragment } from './queries'
 
 export type User = {

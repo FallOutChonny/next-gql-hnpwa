@@ -1,12 +1,12 @@
 import React from 'react'
 import Head from 'next/head'
-import Footer from '@/components/AppFooter'
-import Header from '@/components/AppHeader'
-import GlobalStyles from '@/components/GlobalStyles'
-import theme from '@/utils/theme'
+import Footer from '@components/AppFooter'
+import Header from '@components/AppHeader'
+import GlobalStyles from '@components/GlobalStyles'
+import theme from '@utils/theme'
 
 type Props = {
-  children: React.ReactNode
+  children?: React.ReactNode
   table?: {
     props?: React.DetailedHTMLProps<
       React.TableHTMLAttributes<HTMLTableElement>,

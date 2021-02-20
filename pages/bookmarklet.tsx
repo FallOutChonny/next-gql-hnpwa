@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
-import App from '@/components/StaticPage'
-import A from '@/components/AnchorLink'
-import theme from '@/utils/theme'
+import App from '@components/StaticPage'
+import A from '@components/AnchorLink'
+import theme from '@utils/theme'
 
 export default function BookmarkletPage() {
   return (

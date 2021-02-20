@@ -1,9 +1,9 @@
 import React from 'react'
 import NextApp from 'next/app'
 import { ThemeProvider } from 'styled-components'
-import ErrorBoundary from '@/components/ErrorBoundary'
-// import Loading from '@/components/Skeleton'
-import theme from '@/utils/theme'
+import ErrorBoundary from '@components/ErrorBoundary'
+// import Loading from '@components/Skeleton'
+import theme from '@utils/theme'
 
 const Suspense = ({ children, ssr, reload }) => {
   // const [suspense, setSuspense] = React.useState(!ssr)

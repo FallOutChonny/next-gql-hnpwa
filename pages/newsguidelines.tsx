@@ -1,5 +1,5 @@
 import React from 'react'
-import App from '@/components/StaticPage'
+import App from '@components/StaticPage'
 
 export default function NewsGuidelinesPage() {
   return (

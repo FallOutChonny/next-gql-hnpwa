@@ -1,6 +1,6 @@
 import React from 'react'
-import { NewsItems } from '@/config/types'
-import Comment from '@/components/CommentWithFooter'
+import { NewsItems } from '@config/types'
+import Comment from '@components/CommentWithFooter'
 
 type Props = {
   render?: (rows: JSX.Element[]) => JSX.Element

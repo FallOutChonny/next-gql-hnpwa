@@ -1,8 +1,8 @@
 import React from 'react'
-import App from '@/components/App'
-import Comment from '@/components/Comment'
-import ReadMoreLink from '@/components/ReadMoreLink'
-import Spacer from '@/components/Spacer'
+import App from '@components/App'
+import Comment from '@components/Comment'
+import ReadMoreLink from '@components/ReadMoreLink'
+import Spacer from '@components/Spacer'
 import { useNewComments } from '@/apollo/new-comments'
 import { withApollo } from '@/apollo/client'
 

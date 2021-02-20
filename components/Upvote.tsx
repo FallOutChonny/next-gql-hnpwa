@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
-import A from '@/components/AnchorLink'
+import A from '@components/AnchorLink'
 
 const UpvoteShape = styled.div`
   width: 10px;

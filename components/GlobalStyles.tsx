@@ -1,5 +1,5 @@
 import { createGlobalStyle, css } from 'styled-components'
-import { theme } from '@/utils/theme'
+import { theme } from '@utils/theme'
 
 const device = {
   mobileS: `(max-width: 320px)`,

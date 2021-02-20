@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import Spacer from '@/components/Spacer'
+import Spacer from '@components/Spacer'
 
 const shimmer = keyframes`
   0% {
