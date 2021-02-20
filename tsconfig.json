@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "allowJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -13,9 +13,16 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": false,
-    "target": "es5",
-    "typeRoots": ["src/@types", "node_modules/@types"]
+    "target": "esnext",
+    "typeRoots": ["@types", "node_modules/@types"],
+    "paths": {
+      "@/lib/*": ["lib/*"],
+      "@/config/*": ["config/*"],
+      "@/components/*": ["components/*"],
+      "@/utils/*": ["utils/*"],
+      "@/apollo/*": ["apollo/*"]
+    }
   },
-  "exclude": ["dist", ".next", "out", "node_modules"],
-  "include": ["next-env.d.ts", "src"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],
+  "exclude": ["node_modules"]
 }
