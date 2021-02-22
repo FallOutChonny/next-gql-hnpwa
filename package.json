@@ -10,7 +10,7 @@
     "find:unused": "next-unused",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["apollo", "graphql", "hacker news", "next.js", "react"],
   "author": "",
   "license": "MIT",
   "next-unused": {
