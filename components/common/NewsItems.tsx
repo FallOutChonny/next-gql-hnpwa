@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { A, Upvote, LinkTitle } from '@components/ui'
 import { timeSince, getHostname } from '@utils/web-helper'
 import Feed from '@utils/feed'
-import type { NewsItems } from '@data/news-items'
+import type { NewsItems } from '@api/news-items'
 
 type Props = {
   data: NewsItems

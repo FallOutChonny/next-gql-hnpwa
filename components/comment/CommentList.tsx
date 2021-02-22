@@ -1,5 +1,5 @@
 import React from 'react'
-import type { NewsItems } from '@data/news-items'
+import type { NewsItems } from '@api/news-items'
 import Comment from './CommentWithFooter'
 
 type Props = {
