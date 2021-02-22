@@ -1,6 +1,6 @@
 import firebase from 'firebase/app'
-import { NewsItems } from '@config/types'
-import { HN_API_URL, HN_API_VERSION } from '@config/app-config'
+import { HN_API_URL, HN_API_VERSION } from './config'
+import type { NewsItems } from './news-items'
 
 let api: firebase.database.Reference
 

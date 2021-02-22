@@ -1,16 +1,16 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import App from '@components/App'
-import A from '@components/AnchorLink'
-import { withApollo } from '@/apollo/client'
-import { useUser } from '@/apollo/user'
+import { Layout } from '@components/common'
+import { A } from '@components/ui'
+import { useUser } from '@api/user'
+import { withApollo } from '@api/client'
 
 function UserPage() {
   const { data } = useUser()
 
   return (
-    <App title={`Profile: ${data.id}`} isFooterVisible={false}>
+    <Layout title={`Profile: ${data.id}`} isFooterVisible={false}>
       <tr className="height-10" title={`Profile: ${data.id}`} />
       <tr>
         <td>
@@ -73,7 +73,7 @@ function UserPage() {
           <br />
         </td>
       </tr>
-    </App>
+    </Layout>
   )
 }
 

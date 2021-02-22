@@ -1,10 +1,9 @@
 import React from 'react'
-import App from '@components/App'
-import { withApollo } from '@/apollo/client'
+import { Layout } from '@components/common'
+// import { withApollo } from '@api/client'
 
-function FrontPage() {
-
-  return <App title="Ask" />
+export default function FrontPage() {
+  return <Layout title="Front" />
 }
 
-export default withApollo(FrontPage)
+// export default withApollo(FrontPage)

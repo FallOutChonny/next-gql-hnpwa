@@ -1,9 +1,9 @@
 import React from 'react'
 import Head from 'next/head'
-import Footer from '@components/AppFooter'
-import Header from '@components/AppHeader'
-import GlobalStyles from '@components/GlobalStyles'
 import theme from '@utils/theme'
+import Header from './Header'
+import Footer from './Footer'
+import GlobalStyles from './GlobalStyles'
 
 type Props = {
   children?: React.ReactNode
@@ -28,7 +28,7 @@ const defaultTableProps = {
   cellSpacing: 0,
 }
 
-export default function App({
+export default function Layout({
   title,
   children,
   extra,

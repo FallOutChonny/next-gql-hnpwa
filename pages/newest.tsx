@@ -1,17 +1,15 @@
 import React from 'react'
-import App from '@components/App'
-import NewsItems from '@components/NewsItems'
-import ReadMoreLink from '@components/ReadMoreLink'
-import Spacer from '@components/Spacer'
-import { Feed } from '@config/types'
-import { withApollo } from '@/apollo/client'
-import { useNewsItems } from '@/apollo/news-items'
+import { Layout, NewsItems } from '@components/common'
+import { Spacer, ReadMoreLink } from '@components/ui'
+import Feed from '@utils/feed'
+import { useNewsItems } from '@api/news-items'
+import { withApollo } from '@api/client'
 
 function NewestPage() {
   const { data, loading } = useNewsItems({ feed: Feed.NEWEST })
 
   return (
-    <App title="New Links" loading={loading}>
+    <Layout title="New Links" loading={loading}>
       <Spacer />
       {data.edges.map((x, idx) => (
         <NewsItems
@@ -23,7 +21,7 @@ function NewestPage() {
         visible={data.pageInfo.hasNextPage}
         url={`/newest?p=${data.nextPage}`}
       />
-    </App>
+    </Layout>
   )
 }
 

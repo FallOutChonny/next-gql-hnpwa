@@ -1,21 +1,20 @@
 import React from 'react'
-import App from '@components/App'
-import NewsItemsIndex from '@components/NewsItems'
-import CommentList from '@components/CommentList'
-import { withApollo } from '@/apollo/client'
-import { useNewsItemsWithComments } from '@/apollo/news-items'
+import { Layout, NewsItems } from '@components/common'
+import { CommentList } from '@components/comment'
+import { useNewsItemsWithComments } from '@api/news-items'
+import { withApollo } from '@api/client'
 
 function NewsItemsPage() {
   const { data, loading } = useNewsItemsWithComments()
 
   return (
-    <App title={data.title} loading={loading}>
+    <Layout title={data.title} loading={loading}>
       <tr className="height-10" title={data.title} />
       <tr>
         <td>
           <table id="fatitem">
             <tbody>
-              <NewsItemsIndex data={data} isRankVisible={false} />
+              <NewsItems data={data} isRankVisible={false} />
               <tr className="height-3" />
               <tr>
                 <td colSpan={2} />
@@ -50,7 +49,7 @@ function NewsItemsPage() {
           <br />
         </td>
       </tr>
-    </App>
+    </Layout>
   )
 }
 

@@ -1,11 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import { NewsItems } from '@config/types'
-import Upvote from '@components/Upvote'
-import CommentText from '@components/CommentText'
-import A from '@components/AnchorLink'
+import { Upvote, A } from '@components/ui'
 import { timeSince } from '@utils/web-helper'
+import type { NewsItems } from '@api/news-items'
+import CommentText from './CommentText'
 
 type Props = {
   data: NewsItems

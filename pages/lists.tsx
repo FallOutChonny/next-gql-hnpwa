@@ -1,11 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
-import App from '@components/App'
-import A from '@components/AnchorLink'
+import { Layout } from '@components/common'
+import { A } from '@components/ui'
 
 export default function ListsPage() {
   return (
-    <App
+    <Layout
       title="Lists"
       table={{
         props: { cellPadding: 1, cellSpacing: 1 },
@@ -64,6 +64,6 @@ export default function ListsPage() {
         </td>
         <td>Comments from new accounts</td>
       </tr>
-    </App>
+    </Layout>
   )
 }

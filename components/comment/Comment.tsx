@@ -1,10 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
-import A from '@components/AnchorLink'
-import Upvote from '@components/Upvote'
-import CommentText from '@components/CommentText'
+import { A, Upvote } from '@components/ui'
 import { Comment } from 'apollo/new-comments'
 import { timeSince } from '@utils/web-helper'
+import CommentText from './CommentText'
 
 export default function CommentIndex({ data }: { data: Comment }) {
   return (

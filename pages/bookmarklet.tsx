@@ -1,12 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
-import App from '@components/StaticPage'
-import A from '@components/AnchorLink'
+import { StaticPage } from '@components/common'
+import { A } from '@components/ui'
 import theme from '@utils/theme'
 
 export default function BookmarkletPage() {
   return (
-    <App title="Y Combinator: Bookmarklet" isFooterVisible={false}>
+    <StaticPage title="Y Combinator: Bookmarklet" isFooterVisible={false}>
       <b>Bookmarklet</b>
       <br />
       <br />
@@ -47,6 +47,6 @@ export default function BookmarkletPage() {
           </span>
         </p>
       </div>
-    </App>
+    </StaticPage>
   )
 }

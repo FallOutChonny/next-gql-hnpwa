@@ -1,9 +1,9 @@
 import React from 'react'
-import App from '@components/StaticPage'
+import { StaticPage } from '@components/common'
 
 export default function NewsFAQPage() {
   return (
-    <App title="Hacker News FAQ">
+    <StaticPage title="Hacker News FAQ">
       <b>Hacker News FAQ</b>
       <br />
       <br />
@@ -186,6 +186,6 @@ export default function NewsFAQPage() {
         </a>{' '}
         works most of the time.
       </p>
-    </App>
+    </StaticPage>
   )
 }

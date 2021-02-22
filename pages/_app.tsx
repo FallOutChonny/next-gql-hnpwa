@@ -1,7 +1,7 @@
 import React from 'react'
 import NextApp from 'next/app'
 import { ThemeProvider } from 'styled-components'
-import ErrorBoundary from '@components/ErrorBoundary'
+import { ErrorBoundary } from '@components/common'
 // import Loading from '@components/Skeleton'
 import theme from '@utils/theme'
 

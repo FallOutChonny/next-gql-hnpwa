@@ -1,12 +1,11 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import App from '@components/App'
-import A from '@components/AnchorLink'
-import Spacer from '@components/Spacer'
-import CommentList from '@components/CommentList'
-import { useUserPosts } from '@/apollo/user'
-import { withApollo } from '@/apollo/client'
+import { Layout } from '@components/common'
+import { A, Spacer } from '@components/ui'
+import { CommentList } from '@components/comment'
+import { useUserPosts } from '@api/user'
+import { withApollo } from '@api/client'
 
 function ThreadsPage() {
   const { query } = useRouter()
@@ -16,7 +15,7 @@ function ThreadsPage() {
   const title = `${query.id}'s threads`
 
   return (
-    <App title={title} loading={loading} extra={title}>
+    <Layout title={title} loading={loading} extra={title}>
       <Spacer title={title} />
       {data.edges.map(comment => (
         <CommentList
@@ -65,7 +64,7 @@ function ThreadsPage() {
           </tr>
         </>
       )}
-    </App>
+    </Layout>
   )
 }
 

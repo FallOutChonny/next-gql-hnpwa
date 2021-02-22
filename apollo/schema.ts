@@ -1,8 +1,8 @@
 import { makeExecutableSchema } from 'graphql-tools'
 import merge from 'lodash.merge'
-import * as items from '@/apollo/news-items'
-import * as comments from '@/apollo/new-comments'
-import * as user from '@/apollo/user'
+import * as items from './news-items'
+import * as comments from './new-comments'
+import * as user from './user'
 
 const Query = /* GraphQL */ `
   type Query {

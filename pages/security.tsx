@@ -1,9 +1,9 @@
 import React from 'react'
-import App from '@components/StaticPage'
+import { StaticPage } from '@components/common'
 
 export default function SecurityPage() {
   return (
-    <App title="Hacker News Security" isFooterVisible={false}>
+    <StaticPage title="Hacker News Security" isFooterVisible={false}>
       <b>Hacker News Security</b>
       <p>
         If you find a security hole, please let us know at{' '}
@@ -223,6 +223,6 @@ export default function SecurityPage() {
         shoot us an email and we'll happily add you. We crawled through tons of
         emails trying to find all reports but inevitably missed some.
       </p>
-    </App>
+    </StaticPage>
   )
 }

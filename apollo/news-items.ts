@@ -1,10 +1,67 @@
 import { useRouter } from 'next/router'
 import { useQuery, gql } from '@apollo/client'
 import pathOr from 'lodash.get'
-import { POSTS_PER_PAGE } from '@config/app-config'
-import { QueryResult, nullQueryResult, NewsItems } from '@config/types'
-import { fetch, fetchNewsItems } from '@utils/hn-data-api'
-import { newsItemsFragment, newsItemsConnectionFragment } from './queries'
+import { POSTS_PER_PAGE } from './config'
+import { defaultQueryResult } from './defaults'
+import { fetch, fetchNewsItems } from './hn-data-api'
+import { QueryResult } from './types'
+
+export type NewsItems = {
+  id: number
+  deleted: boolean
+  type: string
+  by: string
+  time: number
+  text: string
+  dead: boolean
+  parent: NewsItems
+  poll: number
+  kids: NewsItems[]
+  url: string
+  score: number
+  title: string
+  parts: number[]
+  descendants: number
+  rank: number
+}
+
+export type NewsItemsData = QueryResult<NewsItems>
+
+export const newsItemsFragment = /* GraphQL */ `
+  fragment NewsItemsFields on NewsItems {
+    by
+    id
+    score
+    text
+    time
+    title
+    type
+    url
+    parent {
+      id
+      title
+    }
+  }
+`
+
+export const newsItemsConnectionFragment = /* GraphQL */ `
+  fragment NewsItemsConnectionFields on NewsItemsConnection {
+    edges {
+      cursor
+      node {
+        ...NewsItemsFields
+        kids {
+          __typename
+          id
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      totalPageCount
+    }
+  }
+`
 
 export const typeDefs = /* GraphQL */ `
   enum Feed {
@@ -146,7 +203,7 @@ export const useNewsItems = ({ feed }: { feed?: string } = {}) => {
   const { query } = useRouter()
   const first = +pathOr(query, ['p'], 1)
 
-  const { data, ...others } = useQuery<{ newsItems: QueryResult<NewsItems> }>(
+  const { data, ...others } = useQuery<{ newsItems: NewsItemsData }>(
     newsItemsQuery,
     {
       variables: {
@@ -157,7 +214,7 @@ export const useNewsItems = ({ feed }: { feed?: string } = {}) => {
 
   return {
     data: {
-      ...(pathOr(data, ['feed'], nullQueryResult) as QueryResult<NewsItems>),
+      ...(pathOr(data, ['feed'], defaultQueryResult) as NewsItemsData),
       nextPage: first + 1,
       startIndex: (first - 1) * POSTS_PER_PAGE,
     },

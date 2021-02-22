@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import A from '@components/AnchorLink'
+import { A }  from '@components/ui'
 
 type Props = {
   url: string

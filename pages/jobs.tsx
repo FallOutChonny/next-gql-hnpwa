@@ -1,19 +1,16 @@
 import React from 'react'
 import Link from 'next/link'
-import App from '@components/App'
-import NewsItems from '@components/NewsItems'
-import A from '@components/AnchorLink'
-import ReadMoreLink from '@components/ReadMoreLink'
-import Spacer from '@components/Spacer'
-import { Feed } from '@config/types'
-import { withApollo } from '@/apollo/client'
-import { useNewsItems } from '@/apollo/news-items'
+import { Layout, NewsItems } from '@components/common'
+import { A, Spacer, ReadMoreLink } from '@components/ui'
+import Feed from '@utils/feed'
+import { useNewsItems } from '@api/news-items'
+import { withApollo } from '@api/client'
 
 function JobsPage() {
   const { data, loading } = useNewsItems({ feed: Feed.JOB })
 
   return (
-    <App title="jobs" loading={loading}>
+    <Layout title="jobs" loading={loading}>
       <Spacer height={16} />
       <tr>
         <td />
@@ -40,7 +37,7 @@ function JobsPage() {
         visible={data.pageInfo.hasNextPage}
         url={`/jobs?p=${data.nextPage}`}
       />
-    </App>
+    </Layout>
   )
 }
 

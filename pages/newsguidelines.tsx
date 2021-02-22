@@ -1,9 +1,9 @@
 import React from 'react'
-import App from '@components/StaticPage'
+import { StaticPage } from '@components/common'
 
 export default function NewsGuidelinesPage() {
   return (
-    <App
+    <StaticPage
       title="Hacker News FAQ"
       footer="Please don't submit comments saying that HN is turning into Reddit. It's
     a semi-noob illusion, as old as the hills.">
@@ -131,6 +131,6 @@ export default function NewsGuidelinesPage() {
         Please don't comment about the voting on comments. It never does any
         good, and it makes boring reading.
       </p>
-    </App>
+    </StaticPage>
   )
 }

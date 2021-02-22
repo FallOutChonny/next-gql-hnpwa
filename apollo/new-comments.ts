@@ -1,10 +1,33 @@
 import { useRouter } from 'next/router'
 import fetch from 'isomorphic-unfetch'
 import { useQuery, gql } from '@apollo/client'
-import pathOr from 'lodash.get'
-import { QueryResult, HNQueryResult, nullQueryResult } from '@config/types'
-import { HN_ALGOLIA_API_URL, POSTS_PER_PAGE } from '@config/app-config'
-import { fetchNewsItems } from '@utils/hn-data-api'
+import getOr from 'lodash.get'
+import { HN_ALGOLIA_API_URL, POSTS_PER_PAGE } from './config'
+import { defaultQueryResult } from './defaults'
+import { fetchNewsItems } from './hn-data-api'
+import { QueryResult } from './types'
+
+type Item = {
+  author: string
+  objectID: number
+  parent_id: number
+  story_id: number
+  points: number
+  url: string
+  comment_text: string
+  created_at: string
+  created_at_i: number
+  story_title: string
+}
+
+type HNAlgoriaQueryResult<T = any> = {
+  hits: T[]
+  hitsPerPage: number
+  page: number
+  nbPages: number
+  params: string
+  query: string
+}
 
 export type Comment = {
   by: string
@@ -16,17 +39,10 @@ export type Comment = {
   score: number
 }
 
-export type Item = {
-  author: string
-  objectID: number
-  parent_id: number
-  story_id: number
-  points: number
-  url: string
-  comment_text: string
-  created_at: string
-  created_at_i: number
-  story_title: string
+type NewComments = QueryResult<Comment>
+
+type NewCommentsData = {
+  newsItems: NewComments
 }
 
 export const typeDefs = /* GraphQL */ `
@@ -61,7 +77,7 @@ export const resolvers = {
   Query: {
     newComments: async (_, { first }) => {
       const page = first - 1
-      const response: HNQueryResult = await fetch(
+      const response: HNAlgoriaQueryResult = await fetch(
         `${HN_ALGOLIA_API_URL}/search_by_date?tags=comment&page=${page}&hitsPerPage=${POSTS_PER_PAGE}`,
       ).then(response => response.json())
 
@@ -135,26 +151,17 @@ export const newCommentsQuery = gql`
   }
 `
 
-type NewCommentsQueryResult = {
-  newsItems: QueryResult<Comment>
-}
-
 export const useNewComments = () => {
   const { query } = useRouter()
-  const first = +pathOr(query, ['p'], 1)
+  const first = +getOr(query, ['p'], 1)
 
-  const { data, ...others } = useQuery<NewCommentsQueryResult>(
-    newCommentsQuery,
-    {
-      variables: { first },
-    },
-  )
+  const { data, ...others } = useQuery<NewCommentsData>(newCommentsQuery, {
+    variables: { first },
+  })
 
   return {
     data: {
-      ...(pathOr(data, ['newComments'], nullQueryResult) as QueryResult<
-        Comment
-      >),
+      ...(getOr(data, ['newComments'], defaultQueryResult) as NewComments),
       nextPage: first + 1,
       startIndex: (first - 1) * POSTS_PER_PAGE,
     },

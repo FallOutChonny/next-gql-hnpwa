@@ -7,11 +7,37 @@
     "dev": "next",
     "build": "ANALYZE=false next build",
     "start": "next start",
+    "find:unused": "next-unused",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "next-unused": {
+    "alias": {
+      "@config/*": [
+        "config/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+      "@/apollo/*": [
+        "apollo/*"
+      ]
+    },
+    "debug": true,
+    "include": [
+      "components",
+      "pages"
+    ],
+    "exclude": [],
+    "entrypoints": [
+      "pages"
+    ]
+  },
   "dependencies": {
     "@apollo/client": "^3.3.11",
     "@apollo/link-error": "^2.0.0-beta.3",

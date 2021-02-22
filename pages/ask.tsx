@@ -1,17 +1,16 @@
 import React from 'react'
-import App from '@components/App'
-import NewsItems from '@components/NewsItems'
-import ReadMoreLink from '@components/ReadMoreLink'
-import Spacer from '@components/Spacer'
-import { Feed } from '@config/types'
-import { withApollo } from '@/apollo/client'
-import { useNewsItems } from '@/apollo/news-items'
+import { Layout, NewsItems } from '@components/common'
+import { Spacer, ReadMoreLink } from '@components/ui'
+import NewsItems from '@components/common/NewsItems'
+import Feed from '@utils/feed'
+import { useNewsItems } from '@api/news-items'
+import { withApollo } from '@api/client'
 
 function AskPage() {
   const { data, loading } = useNewsItems({ feed: Feed.ASK })
 
   return (
-    <App title="Ask" loading={loading}>
+    <Layout title="Ask" loading={loading}>
       <Spacer height={6} />
       {data.edges.map((x, idx) => (
         <NewsItems
@@ -23,7 +22,7 @@ function AskPage() {
         visible={data.pageInfo.hasNextPage}
         url={`/ask?p=${data.nextPage}`}
       />
-    </App>
+    </Layout>
   )
 }
 

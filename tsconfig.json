@@ -20,6 +20,8 @@
       "@config/*": ["config/*"],
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
+      "@api/*": ["apollo/*"],
+      "@data/*": ["apollo/*"],
       "@/apollo/*": ["apollo/*"]
     }
   },

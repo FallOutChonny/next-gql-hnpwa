@@ -1,11 +1,9 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import App from '@components/App'
-import NewsItemsIndex from '@components/NewsItems'
-import ReadMoreLink from '@components/ReadMoreLink'
-import Spacer from '@components/Spacer'
-import { withApollo } from '@/apollo/client'
-import { useUserPosts } from '@/apollo/user'
+import { Layout, NewsItems } from '@components/common'
+import { Spacer, ReadMoreLink } from '@components/ui'
+import { withApollo } from '@api/client'
+import { useUserPosts } from '@api/user'
 
 function SubmittedPage() {
   const { query } = useRouter()
@@ -15,10 +13,10 @@ function SubmittedPage() {
   const title = `${query.id}'s submissions`
 
   return (
-    <App title={title} loading={loading} extra={title}>
+    <Layout title={title} loading={loading} extra={title}>
       <Spacer title={title} />
       {data.edges.map((x, idx) => (
-        <NewsItemsIndex
+        <NewsItems
           key={x.node.id}
           data={{ ...x.node, rank: idx + data.startIndex + 1 }}
         />
@@ -30,7 +28,7 @@ function SubmittedPage() {
         className="text-dark"
         space={false}
       />
-    </App>
+    </Layout>
   )
 }
 

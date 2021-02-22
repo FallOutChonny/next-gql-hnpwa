@@ -1,11 +1,16 @@
 import pathOr from 'lodash.get'
 import { useRouter } from 'next/router'
 import { useQuery, gql } from '@apollo/client'
-import { NewsItems, QueryResult, nullQueryResult } from '@config/types'
-import { fetchUser, fetchNewsItems } from '@utils/hn-data-api'
 import { getEnDate, formatDate } from '@utils/web-helper'
-import { POSTS_PER_PAGE } from '@config/app-config'
-import { newsItemsFragment, newsItemsConnectionFragment } from './queries'
+import { POSTS_PER_PAGE } from './config'
+import { defaultQueryResult } from './defaults'
+import { fetchUser, fetchNewsItems } from './hn-data-api'
+import {
+  NewsItems,
+  NewsItemsData,
+  newsItemsFragment,
+  newsItemsConnectionFragment,
+} from './news-items'
 
 export type User = {
   id: number
@@ -137,7 +142,7 @@ export const useUserPosts = ({ feed }: { feed?: string } = {}) => {
   const { query } = useRouter()
   const first = +pathOr(query, ['p'], 1)
 
-  const { data, ...others } = useQuery<{ userPosts: QueryResult<NewsItems> }>(
+  const { data, ...others } = useQuery<{ userPosts: NewsItemsData }>(
     userPostsQuery,
     {
       variables: {
@@ -150,9 +155,7 @@ export const useUserPosts = ({ feed }: { feed?: string } = {}) => {
 
   return {
     data: {
-      ...(pathOr(data, ['userPosts'], nullQueryResult) as QueryResult<
-        NewsItems
-      >),
+      ...(pathOr(data, ['userPosts'], defaultQueryResult) as NewsItemsData),
       nextPage: first + 1,
       startIndex: (first - 1) * POSTS_PER_PAGE,
     },
