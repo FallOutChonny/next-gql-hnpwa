@@ -20,9 +20,7 @@
       "@config/*": ["config/*"],
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
-      "@api/*": ["apollo/*"],
-      "@data/*": ["apollo/*"],
-      "@/apollo/*": ["apollo/*"]
+      "@api/*": ["apollo/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],
