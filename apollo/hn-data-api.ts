@@ -14,11 +14,7 @@ if (!(process as any).browser) {
 }
 
 export async function fetch(url: string) {
-  const eventref = api.child(url)
-  const snapshot = await eventref.once('value')
-  const value = snapshot.val()
-
-  return value
+  return (await api.child(url).once('value')).val()
 }
 
 export async function fetchNewsItems(id: number): Promise<NewsItems> {
