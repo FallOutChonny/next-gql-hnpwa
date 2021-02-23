@@ -11,7 +11,7 @@ export default function ListsPage() {
         props: { cellPadding: 1, cellSpacing: 1 },
         style: { borderSpacing: '7px 0' },
       }}>
-      <tr className="height-10" />
+      <tr className="h-10" />
       <tr>
         <td>
           <A>leaders</A>

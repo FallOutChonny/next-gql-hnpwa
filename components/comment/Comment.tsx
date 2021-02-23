@@ -13,7 +13,7 @@ export default function CommentIndex({ data }: { data: Comment }) {
         <td valign="top">
           <Upvote id={data.id} />
         </td>
-        <td className="text--grey text-10pt">
+        <td className="text-grey text-10pt">
           <div>
             <span className="text-8pt">
               <Link href={`/user?id=${data.by}`}>

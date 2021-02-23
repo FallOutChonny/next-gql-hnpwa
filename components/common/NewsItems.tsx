@@ -17,17 +17,17 @@ export default function NewsItemsIndex({ data, isRankVisible = true }: Props) {
   return (
     <>
       <tr id={`${data.id}`}>
-        <td valign="top" align="right" className="text-10pt text--grey">
+        <td valign="top" align="right" className="text-10pt text-grey">
           {isJobStories || !isRankVisible ? '' : `${data.rank}.`}
         </td>
         <td valign="top">{!isJobStories && <Upvote id={data.id} />}</td>
-        <td className="text-10pt text--grey">
+        <td className="text-10pt text-grey">
           <LinkTitle href={data.url}>{data.title}</LinkTitle>
           {data.url && (
-            <span className="ml-2 text-8pt text--grey">
+            <span className="ml-2 text-8pt text-grey">
               (
               <Link href={`/from?site=${getHostname(data.url)}`}>
-                <A className="text--grey">{getHostname(data.url)}</A>
+                <A className="text-grey">{getHostname(data.url)}</A>
               </Link>
               )
             </span>
@@ -36,7 +36,7 @@ export default function NewsItemsIndex({ data, isRankVisible = true }: Props) {
       </tr>
       <tr>
         <td colSpan={2} />
-        <td className="text-7pt text--grey">
+        <td className="text-7pt text-grey">
           {isJobStories && (
             <span>
               <Link href={`/item?id=${data.id}`}>

@@ -1,9 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
-import Link from '@components/Link'
-import Divider from '@components/Divider'
-import A from '@components/AnchorLink'
+import { Link, Divider, A } from '@components/ui'
 
 export default function AppHeader({
   extra,
@@ -16,14 +14,14 @@ export default function AppHeader({
 
   return (
     <tr>
-      <td className="bg--orange">
+      <td className="bg-orange">
         <table
-          className="width--full border--none pt-1 pr-2 pl-2"
+          className="w-full border-0 pt-1 pr-2 pl-2"
           cellPadding={0}
           cellSpacing={0}>
           <tbody>
             <tr>
-              <td className="pr-4 width-18">
+              <td className="pr-4 w-18">
                 <Link
                   href="/"
                   title={<Logo src="/y18.gif" alt="Hacker News PWA App" />}
@@ -35,7 +33,7 @@ export default function AppHeader({
                   <Link
                     title="Hacker News"
                     href="/news"
-                    className="mr-10 text-600"
+                    className="mr-10 font-semibold"
                     segment={false}
                   />
                   <Link title="new" href="/newest" className={cx('/newest')} />
@@ -48,7 +46,7 @@ export default function AppHeader({
                   <Link title="ask" href="/ask" className={cx('/ask')} />
                   <Link title="show" href="/show" className={cx('/show')} />
                   <Link title="jobs" href="/jobs" className={cx('/jobs')} />
-                  <A className="text-dark no--underline">submit</A>
+                  <A className="text-dark no-underline">submit</A>
                   {extra ? (
                     <span className="text-white">
                       <Divider />
@@ -61,7 +59,7 @@ export default function AppHeader({
               </td>
               <td className="text-right pr-4">
                 <span>
-                  <A className="text-dark no--underline">login</A>
+                  <A className="text-dark no-underline">login</A>
                 </span>
               </td>
             </tr>

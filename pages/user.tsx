@@ -11,7 +11,7 @@ function UserPage() {
 
   return (
     <Layout title={`Profile: ${data.id}`} isFooterVisible={false}>
-      <tr className="height-10" title={`Profile: ${data.id}`} />
+      <tr className="h-10" title={`Profile: ${data.id}`} />
       <tr>
         <td>
           <table>
@@ -47,7 +47,7 @@ function UserPage() {
                 <td />
                 <td>
                   <Link href={`/submitted?id=${data.id}`}>
-                    <A className="text-underline text-dark">submissions</A>
+                    <A className="underline text-dark">submissions</A>
                   </Link>
                 </td>
               </tr>
@@ -55,7 +55,7 @@ function UserPage() {
                 <td />
                 <td>
                   <Link href={`/threads?id=${data.id}`}>
-                    <A className="text-underline text-dark">comments</A>
+                    <A className="underline text-dark">comments</A>
                   </Link>
                 </td>
               </tr>
@@ -63,7 +63,7 @@ function UserPage() {
                 <td />
                 <td>
                   <Link href={`/favorites?id=${data.id}`}>
-                    <A className="text-underline text-dark">favorites</A>
+                    <A className="underline text-dark">favorites</A>
                   </Link>
                 </td>
               </tr>

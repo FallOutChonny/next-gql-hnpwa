@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import { createGlobalStyle } from 'styled-components'
-import A from '@components/AnchorLink'
+import { A } from '@components/ui'
 import theme from '@utils/theme'
 
 type Props = {
@@ -34,10 +34,6 @@ const GlobalStyles = createGlobalStyle`
 
   p {
     margin-bottom: 15px;
-  }
-
-  .text--center {
-    text-align: center;
   }
 `
 

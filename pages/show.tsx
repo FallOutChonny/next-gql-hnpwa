@@ -14,14 +14,14 @@ function ShowHNPage() {
       <Spacer height={16} />
       <tr>
         <td colSpan={2} />
-        <td className="text--grey">
+        <td className="text-grey">
           Please read the{' '}
           <Link href={'/'}>
-            <A className="text-underline text-dark">rules.</A>
+            <A className="underline text-dark">rules.</A>
           </Link>{' '}
           You can also browse the{' '}
           <Link href={'/'}>
-            <A className="text-underline text-dark">newest</A>
+            <A className="underline text-dark">newest</A>
           </Link>{' '}
           Show HNs.
         </td>

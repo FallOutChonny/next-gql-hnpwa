@@ -30,7 +30,7 @@ function ThreadsPage() {
       ))}
       {data.pageInfo.hasNextPage && (
         <>
-          <tr className="height-10" />
+          <tr className="h-10" />
           <tr>
             <td>
               <table>

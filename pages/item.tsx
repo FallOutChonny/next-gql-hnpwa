@@ -9,23 +9,23 @@ function NewsItemsPage() {
 
   return (
     <Layout title={data.title} loading={loading}>
-      <tr className="height-10" title={data.title} />
+      <tr className="h-10" title={data.title} />
       <tr>
         <td>
           <table id="fatitem">
             <tbody>
               <NewsItems data={data} isRankVisible={false} />
-              <tr className="height-3" />
+              <tr className="h-3" />
               <tr>
                 <td colSpan={2} />
                 <td>
                   <form
                     method="POST"
                     action="comment"
-                    className="m-block-end--1em">
+                    className="m-block-end-1em">
                     <textarea
                       css={{ fontFamily: 'monospace' }}
-                      className="text-10pt mb-16 d-block"
+                      className="text-10pt mb-16 block"
                       name="text"
                       cols={60}
                       rows={6}

@@ -15,10 +15,10 @@ export default createGlobalStyle`
     color: #828282;
   }
 
-  ${[1, 2, 3, 4, 5, 6, 10, 12, 14, 15, 16, 18, 146].map(
+  ${[1, 2, 3, 4, 5, 6, 10, 14, 15, 16, 18, 146].map(
     x =>
       css`
-        .width-${x} {
+        .w-${x} {
           width: ${x}px;
         }
 
@@ -58,11 +58,11 @@ export default createGlobalStyle`
           margin-right: ${x}px;
         }
 
-        .margin-${x} {
+        .m-${x} {
           margin: ${x}px;
         }
 
-        .padding-${x} {
+        .p-${x} {
           padding: ${x}px;
         }
       `,
@@ -70,21 +70,21 @@ export default createGlobalStyle`
 
   ${Object.keys(theme).map(
     t => css`
-      .text--${t} {
+      .text-${t} {
         color: ${theme[t]};
       }
 
-      .bg--${t} {
+      .bg-${t} {
         background: ${theme[t]};
       }
     `,
   )}
 
-  .d-block {
+  .block {
     display: block;
   }
 
-  .width--full {
+  .w-full {
     width: 100%;
   }
 
@@ -130,31 +130,27 @@ export default createGlobalStyle`
     }
   }
 
-  .text-600 {
+  .font-semibold {
     font-weight: 600;
   }
 
-  .text-underline {
+  .underline {
     text-decoration: underline;
   }
 
-  .no--underline {
+  .no-underline {
     text-decoration: none;
   }
 
-  a.no--underline:hover {
+  a.no-underline:hover {
     text-decoration: none;
   }
 
-  .border--none {
+  .border-0 {
     border: 0;
   }
 
-  .cursor--pointer {
-    cursor: pointer;
-  }
-
-  .m-block-end--1em {
+  .m-block-end-1em {
     margin-block-end: 1em;
   }
 `

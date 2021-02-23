@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import Spacer from '@components/Spacer'
+import { Spacer } from '@components/ui'
 
 const shimmer = keyframes`
   0% {
@@ -29,7 +29,7 @@ export default function Skeleton({ list = 3 }: Props) {
     <>
       <Spacer />
       <tr>
-        <td colSpan={3} className="width--full">
+        <td colSpan={3} className="w-full">
           <div className="pl-10">
             {Array.from({ length: list }).map((_, idx) => (
               <div key={idx} className="mt-6">

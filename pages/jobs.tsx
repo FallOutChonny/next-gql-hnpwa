@@ -19,10 +19,10 @@ function JobsPage() {
             <img src="/s.gif" alt="Hacker News PWA App" width={14} height={1} />
           </span>
         </td>
-        <td className="text--grey">
+        <td className="text-grey">
           These are jobs at YC startups. See more at{' '}
           <Link href={'/'}>
-            <A className="text-underline text-dark">Work at a Startup</A>
+            <A className="underline text-dark">Work at a Startup</A>
           </Link>
         </td>
       </tr>

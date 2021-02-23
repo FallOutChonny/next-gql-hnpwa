@@ -24,10 +24,10 @@ export default function ReadMoreLink({
 
   return (
     <>
-      {space && <tr className="height-10" />}
+      {space && <tr className="h-10" />}
       <tr>
         <td colSpan={2} />
-        <td className={`text-10pt text--grey ${wrapperClassName}`}>
+        <td className={`text-10pt text-grey ${wrapperClassName}`}>
           <Link href={url}>
             <A className={className}>More</A>
           </Link>

@@ -1,18 +1,17 @@
 import React from 'react'
-import Divider from '@components/Divider'
-import Link from '@components/Link'
+import { Link, Divider } from '@components/ui'
 
-const linkCls = 'text--grey no--underline'
+const linkCls = 'text-grey no-underline'
 
 export default function AppFooter() {
   return (
     <tr>
       <td>
         <img src="/s.gif" height={10} width={0} alt="Hacker News PWA App" />
-        <table className="width--full" cellSpacing={0} cellPadding={1}>
+        <table className="w-full" cellSpacing={0} cellPadding={1}>
           <tbody>
             <tr>
-              <td className="bg--orange" />
+              <td className="bg-orange" />
             </tr>
           </tbody>
         </table>
@@ -52,9 +51,9 @@ export default function AppFooter() {
           </div>
           <form
             method="get"
-            className="mt-15 m-block-end--1em"
+            className="mt-15 m-block-end-1em"
             action="//hn.algolia.com/">
-            <label htmlFor="search" className="mr-5 text--grey">
+            <label htmlFor="search" className="mr-5 text-grey">
               Search:
             </label>
             <input
@@ -66,7 +65,7 @@ export default function AppFooter() {
               spellCheck="false"
               autoCapitalize="off"
               autoComplete="false"
-              className="width-146 text-10pt"
+              className="w-146 text-10pt"
             />
           </form>
         </center>
