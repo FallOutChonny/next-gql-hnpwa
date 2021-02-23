@@ -1,5 +1,5 @@
 {
-  "name": "next-gql-hnpwa",
+  "name": "next-gql-hackernews",
   "version": "1.0.0",
   "description": "hacker news clone project made with next, react and apollo",
   "main": "index.js",
