@@ -27,10 +27,10 @@ type HNAlgoriaQueryResult<T = any> = {
   query: string
 }
 
-type NewComments = QueryResult<Comment>
+type NewCommentsQueryResult = QueryResult<Comment>
 
 type NewCommentsData = {
-  newsItems: NewComments
+  newsItems: NewCommentsQueryResult
 }
 
 type CommentData = {
@@ -77,7 +77,11 @@ export const useNewComments = () => {
 
   return {
     data: {
-      ...(getOr(data, ['newComments'], defaultQueryResult) as NewComments),
+      ...(getOr(
+        data,
+        ['newComments'],
+        defaultQueryResult,
+      ) as NewCommentsQueryResult),
       nextPage: first + 1,
       startIndex: (first - 1) * POSTS_PER_PAGE,
     },
