@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout } from '@components/common'
 import { Comment } from '@components/comment'
 import { Spacer, ReadMoreLink } from '@components/ui'
-import { useNewComments } from '@api/new-comments'
+import { useNewComments } from '@api/comments'
 import { withApollo } from '@api/client'
 
 function NewCommentsPage() {

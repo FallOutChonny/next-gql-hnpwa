@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout } from '@components/common'
 import { Comment } from '@components/comment'
 import { Spacer, ReadMoreLink } from '@components/ui'
-import { useBestComments } from '@api/best-comments'
+import { useBestComments } from '@api/comments'
 import { withApollo } from '@api/client'
 
 function BestCommentsPage() {

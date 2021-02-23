@@ -5,9 +5,35 @@ import getOr from 'lodash.get'
 import { HN_ALGOLIA_API_URL, POSTS_PER_PAGE } from './config'
 import { defaultQueryResult } from './defaults'
 import { fetchNewsItems } from './hn-data-api'
+import { NewsItemsData } from './news-items'
 import { QueryResult } from './types'
 
-type Item = {
+export type Comment = {
+  by: string
+  id: number
+  parent: Comment
+  text: string
+  title: string
+  time: number
+  score: number
+}
+
+type HNAlgoriaQueryResult<T = any> = {
+  hits: T[]
+  hitsPerPage: number
+  page: number
+  nbPages: number
+  params: string
+  query: string
+}
+
+type NewComments = QueryResult<Comment>
+
+type NewCommentsData = {
+  newsItems: NewComments
+}
+
+type CommentData = {
   author: string
   objectID: number
   parent_id: number
@@ -20,29 +46,85 @@ type Item = {
   story_title: string
 }
 
-type HNAlgoriaQueryResult<T = any> = {
-  hits: T[]
-  hitsPerPage: number
-  page: number
-  nbPages: number
-  params: string
-  query: string
+const newCommentsQuery = gql`
+  query NewComments($first: Int) {
+    newComments(first: $first) {
+      edges {
+        cursor
+        node {
+          id
+          text
+          by
+          time
+          title
+        }
+      }
+      pageInfo {
+        hasNextPage
+        totalPageCount
+      }
+    }
+  }
+`
+
+export const useNewComments = () => {
+  const { query } = useRouter()
+  const first = +getOr(query, ['p'], 1)
+
+  const { data, ...others } = useQuery<NewCommentsData>(newCommentsQuery, {
+    variables: { first },
+  })
+
+  return {
+    data: {
+      ...(getOr(data, ['newComments'], defaultQueryResult) as NewComments),
+      nextPage: first + 1,
+      startIndex: (first - 1) * POSTS_PER_PAGE,
+    },
+    ...others,
+  }
 }
 
-export type Comment = {
-  by: string
-  id: number
-  parent: Comment
-  text: string
-  title: string
-  time: number
-  score: number
-}
+const bestCommentsQuery = gql`
+  query BestComments($first: Int) {
+    bestComments(first: $first) {
+      edges {
+        cursor
+        node {
+          id
+          text
+          by
+          time
+          title
+        }
+      }
+      pageInfo {
+        hasNextPage
+        totalPageCount
+      }
+    }
+  }
+`
 
-type NewComments = QueryResult<Comment>
+export const useBestComments = () => {
+  const router = useRouter()
+  const first = +getOr(router, ['query', 'p'], 1)
 
-type NewCommentsData = {
-  newsItems: NewComments
+  const { data, ...others } = useQuery<{ bestComments: NewsItemsData }>(
+    bestCommentsQuery,
+    {
+      variables: { first },
+    },
+  )
+
+  return {
+    data: {
+      ...(getOr(data, ['bestComments'], defaultQueryResult) as NewsItemsData),
+      nextPage: first + 1,
+      startIndex: (first - 1) * POSTS_PER_PAGE,
+    },
+    ...others,
+  }
 }
 
 export const typeDefs = /* GraphQL */ `
@@ -109,10 +191,10 @@ export const resolvers = {
   },
 
   CommentEdge: {
-    cursor: (comment: Item) => {
+    cursor: (comment: CommentData) => {
       return Buffer.from(comment.created_at).toString('base64')
     },
-    node: (comment: Item) => ({
+    node: (comment: CommentData) => ({
       by: comment.author,
       id: Number(comment.objectID),
       parent: comment.story_id,
@@ -128,43 +210,4 @@ export const resolvers = {
     // time: (comment: Comment) => new Date(comment.time),
     parent: async (comment: Comment) => fetchNewsItems(comment.parent as any),
   },
-}
-
-export const newCommentsQuery = gql`
-  query NewComments($first: Int) {
-    newComments(first: $first) {
-      edges {
-        cursor
-        node {
-          id
-          text
-          by
-          time
-          title
-        }
-      }
-      pageInfo {
-        hasNextPage
-        totalPageCount
-      }
-    }
-  }
-`
-
-export const useNewComments = () => {
-  const { query } = useRouter()
-  const first = +getOr(query, ['p'], 1)
-
-  const { data, ...others } = useQuery<NewCommentsData>(newCommentsQuery, {
-    variables: { first },
-  })
-
-  return {
-    data: {
-      ...(getOr(data, ['newComments'], defaultQueryResult) as NewComments),
-      nextPage: first + 1,
-      startIndex: (first - 1) * POSTS_PER_PAGE,
-    },
-    ...others,
-  }
 }

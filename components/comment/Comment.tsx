@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { A, Upvote } from '@components/ui'
-import { Comment } from 'apollo/new-comments'
+import type { Comment } from '@api/comments'
 import { timeSince } from '@utils/web-helper'
 import CommentText from './CommentText'
 
