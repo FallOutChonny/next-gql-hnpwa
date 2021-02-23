@@ -1,6 +1,6 @@
 import { ApolloServer } from 'apollo-server-micro'
-import schema from '@/apollo/schema'
-import { GRAPHQL_URL } from '@/apollo/config'
+import schema from '@api/schema'
+import { GRAPHQL_URL } from '@api/config'
 
 const apolloServer = new ApolloServer({ schema })
 
