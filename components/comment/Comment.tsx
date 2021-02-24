@@ -43,7 +43,7 @@ export default function CommentIndex({ data }: { data: Comment }) {
           <CommentText html={data.text} />
         </td>
       </tr>
-      <tr className="height-15" />
+      <tr className="h-15" />
     </>
   )
 }

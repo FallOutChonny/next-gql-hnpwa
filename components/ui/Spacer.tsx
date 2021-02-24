@@ -6,6 +6,6 @@ const Spacer = ({
 }: {
   height?: number
   title?: string
-}) => <tr title={title} className={`height-${height}`} />
+}) => <tr title={title} className={`h-${height}`} />
 
 export default Spacer

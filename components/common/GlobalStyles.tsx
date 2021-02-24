@@ -22,7 +22,7 @@ export default createGlobalStyle`
           width: ${x}px;
         }
 
-        .height-${x} {
+        .h-${x} {
           height: ${x}px;
         }
 

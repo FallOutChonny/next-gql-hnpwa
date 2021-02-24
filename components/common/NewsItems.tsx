@@ -67,7 +67,7 @@ export default function NewsItemsIndex({ data, isRankVisible = true }: Props) {
           )}
         </td>
       </tr>
-      <tr className="height-5" />
+      <tr className="h-5" />
     </>
   )
 }
